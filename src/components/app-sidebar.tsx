@@ -17,11 +17,6 @@ import { Link } from "react-router";
 import { getSidebarItems } from "@/utils/getSidebarItems";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 
-// This is sample data.
-// const data = {
-//   navMain: getSidebarItems("RECEIVER"),
-// };
-
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: userData } = useUserInfoQuery(undefined);
 
@@ -31,13 +26,20 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <Logo></Logo>
+        <Link
+          to="/"
+          className="text-primary hover:text-primary/90 flex items-center gap-2 font-bold text-center justify-center"
+        >
+          <Logo /> ParcelGuru
+        </Link>
       </SidebarHeader>
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
         {data.navMain.map((item) => (
           <SidebarGroup key={item.title}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+            <SidebarGroupLabel className="text-foreground/70 text-md">
+              {item.title}
+            </SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {item.items.map((item) => (

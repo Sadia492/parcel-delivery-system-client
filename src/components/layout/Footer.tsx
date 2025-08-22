@@ -6,9 +6,9 @@ export default function Footer() {
       <div className="mx-auto w-11/12 space-y-8 px-4 py-16 lg:space-y-16">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
-            <div className="flex items-center gap-3">
+            <div className="text-primary hover:text-primary/90 flex items-center gap-2 font-bold">
               <Logo></Logo>
-              Logo
+              ParcelGuru
             </div>
 
             <p className="mt-4 max-w-xs text-muted-foreground">
