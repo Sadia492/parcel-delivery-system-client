@@ -1,4 +1,4 @@
-import Users from "@/pages/Admin/Users";
+import Parcels from "@/pages/Sender/Parcels";
 import type { ISidebarItem } from "@/types";
 
 export const SenderSidebarItems: ISidebarItem[] = [
@@ -6,9 +6,9 @@ export const SenderSidebarItems: ISidebarItem[] = [
     title: "Dashboard",
     items: [
       {
-        title: "Users",
-        url: "/sender/users",
-        component: Users,
+        title: "Parcels",
+        url: "/sender/parcels",
+        component: Parcels,
       },
     ],
   },

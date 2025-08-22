@@ -52,6 +52,10 @@ export const authApi = apiSlice.injectEndpoints({
       query: () => ({ url: "/api/user", method: "GET" }),
       providesTags: ["User"],
     }),
+    getReceivers: builder.query({
+      query: () => ({ url: "/api/user/receivers", method: "GET" }),
+      providesTags: ["User"],
+    }),
 
     blockUser: builder.mutation({
       query: (id) => ({
@@ -78,6 +82,7 @@ export const {
   useLogoutMutation,
   useUserInfoQuery,
   useGetUsersQuery,
+  useGetReceiversQuery,
   useBlockUserMutation,
   useUnblockUserMutation,
 } = authApi;

@@ -3,7 +3,6 @@ import {
   useConfirmDeliveryMutation,
   useGetDeliveryHistoryQuery,
 } from "@/redux/features/parcel/parcel.api";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-hot-toast";
 
@@ -18,8 +17,7 @@ export default function ReceiverDashboard() {
       await confirmDelivery({ parcelId }).unwrap();
       toast.success("Delivery confirmed!");
     } catch (err) {
-      toast.error("Failed to confirm delivery");
-      console.error(err);
+      toast.error((err as any)?.data?.message || "Failed to confirm delivery");
     }
   };
 

@@ -5,8 +5,10 @@ import { UpdateParcel, ParcelStatus } from "./modules/UpdateParcel";
 import { toast } from "react-hot-toast";
 import {
   useBlockParcelMutation,
+  useCancelParcelMutation,
   useUpdateParcelStatusMutation,
 } from "@/redux/features/parcel/parcel.api";
+import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 
 type Parcel = {
   _id: string;
@@ -33,6 +35,8 @@ interface Props {
 export default function ParcelCard({ parcel }: Props) {
   const [updateParcelStatus] = useUpdateParcelStatusMutation();
   const [blockParcel] = useBlockParcelMutation();
+  const [cancelParcel] = useCancelParcelMutation();
+  const { data } = useUserInfoQuery(undefined);
 
   const handleUpdateStatus = async (status: ParcelStatus) => {
     try {
@@ -60,6 +64,15 @@ export default function ParcelCard({ parcel }: Props) {
     } catch (err) {
       toast.error("Failed to update parcel block status");
       console.error(err);
+    }
+  };
+  const handleCancelParcel = async () => {
+    try {
+      await cancelParcel({ parcelId: parcel._id }).unwrap();
+      toast.success("Parcel canceled successfully");
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Failed to cancel parcel");
+      console.error(error);
     }
   };
 
@@ -102,20 +115,35 @@ export default function ParcelCard({ parcel }: Props) {
 
         {/* Action buttons */}
         <div className="flex gap-2 mt-2 flex-wrap">
-          {/* Update Status Dialog */}
-          <UpdateParcel
-            currentStatus={parcel.status as ParcelStatus}
-            onUpdateStatus={handleUpdateStatus} // <-- directly linked to RTK mutation
-          />
+          {data?.data?.role === "admin" ? (
+            <>
+              {/* Update Status Dialog */}
+              <UpdateParcel
+                currentStatus={parcel.status as ParcelStatus}
+                onUpdateStatus={handleUpdateStatus} // <-- directly linked to RTK mutation
+              />
 
-          {/* Block/Unblock */}
-          <Button
-            size="sm"
-            variant={parcel.isBlocked ? "outline" : "destructive"}
-            onClick={handleBlockUnblock}
-          >
-            {parcel.isBlocked ? "Unblock" : "Block"}
-          </Button>
+              {/* Block/Unblock */}
+              <Button
+                size="sm"
+                variant={parcel.isBlocked ? "outline" : "destructive"}
+                onClick={handleBlockUnblock}
+              >
+                {parcel.isBlocked ? "Unblock" : "Block"}
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                size="sm"
+                variant="destructive"
+                onClick={handleCancelParcel}
+                disabled={parcel.isCanceled}
+              >
+                Cancel Parcel
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </div>

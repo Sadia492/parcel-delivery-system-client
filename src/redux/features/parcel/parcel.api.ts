@@ -35,7 +35,11 @@ export const parcelApi = apiSlice.injectEndpoints({
       invalidatesTags: ["Parcel"],
     }),
     getIncomingParcels: builder.query({
-      query: () => ({ url: "/api/parcels/incoming", method: "GET" }),
+      query: () => ({ url: "/api/parcel/incoming", method: "GET" }),
+      providesTags: ["Parcel"],
+    }),
+    getSenderParcels: builder.query({
+      query: () => ({ url: "/api/parcel/me", method: "GET" }),
       providesTags: ["Parcel"],
     }),
     // Get delivery history for Receiver
@@ -46,8 +50,32 @@ export const parcelApi = apiSlice.injectEndpoints({
     // Confirm delivery
     confirmDelivery: builder.mutation({
       query: ({ parcelId }) => ({
-        url: `/api/parcels/confirm-delivery/${parcelId}`,
+        url: `/api/parcel/confirm-delivery/${parcelId}`,
         method: "PATCH",
+      }),
+      invalidatesTags: ["Parcel"],
+    }),
+    cancelParcel: builder.mutation({
+      query: ({ parcelId }) => ({
+        url: `/api/parcel/cancel/${parcelId}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["Parcel"],
+    }),
+
+    // ✅ Create Parcel
+    createParcel: builder.mutation({
+      query: (parcelData: {
+        receiverId: string;
+        fromAddress: string;
+        toAddress: string;
+        parcelType: string;
+        weight: number;
+        note?: string;
+      }) => ({
+        url: "/api/parcel",
+        method: "POST",
+        body: parcelData,
       }),
       invalidatesTags: ["Parcel"],
     }),
@@ -60,5 +88,8 @@ export const {
   useBlockParcelMutation,
   useGetIncomingParcelsQuery,
   useGetDeliveryHistoryQuery,
+  useGetSenderParcelsQuery,
   useConfirmDeliveryMutation,
+  useCancelParcelMutation,
+  useCreateParcelMutation,
 } = parcelApi;
