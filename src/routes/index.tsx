@@ -32,7 +32,7 @@ export const router = createBrowserRouter([
     Component: withAuth(DashboardLayout, role.admin as TRole),
     path: "/admin",
     children: [
-      { index: true, element: <Navigate to="/admin" /> },
+      { index: true, element: <Navigate to="/admin/users" /> },
       ...generateRoutes(AdminSidebarItems),
     ],
   },
@@ -48,7 +48,7 @@ export const router = createBrowserRouter([
     Component: withAuth(DashboardLayout, role.receiver as TRole),
     path: "/receiver",
     children: [
-      { index: true, element: <Navigate to="/receiver" /> },
+      { index: true, element: <Navigate to="/receiver/dashboard" /> },
       ...generateRoutes(ReceiverSidebarItems),
     ],
   },

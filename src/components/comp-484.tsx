@@ -1,39 +1,39 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import {
-  ColumnDef,
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  PaginationState,
-  SortingState,
   useReactTable,
-} from "@tanstack/react-table"
+  type ColumnDef,
+  type PaginationState,
+  type SortingState,
+} from "@tanstack/react-table";
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronUpIcon,
-} from "lucide-react"
+} from "lucide-react";
 
-import { usePagination } from "@/hooks/use-pagination"
-import { cn } from "@/lib/utils"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+import { usePagination } from "@/hooks/use-pagination";
+import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Pagination,
   PaginationContent,
   PaginationEllipsis,
   PaginationItem,
-} from "@/components/ui/pagination"
+} from "@/components/ui/pagination";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -41,17 +41,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
 
 type Item = {
-  id: string
-  name: string
-  email: string
-  location: string
-  flag: string
-  status: "Active" | "Inactive" | "Pending"
-  balance: number
-}
+  id: string;
+  name: string;
+  email: string;
+  location: string;
+  flag: string;
+  status: "Active" | "Inactive" | "Pending";
+  balance: number;
+};
 
 const columns: ColumnDef<Item>[] = [
   {
@@ -119,43 +119,43 @@ const columns: ColumnDef<Item>[] = [
     header: "Balance",
     accessorKey: "balance",
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("balance"))
+      const amount = parseFloat(row.getValue("balance"));
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
-      }).format(amount)
-      return formatted
+      }).format(amount);
+      return formatted;
     },
     size: 120,
   },
-]
+];
 
 export default function Component() {
-  const pageSize = 5
+  const pageSize = 5;
 
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: pageSize,
-  })
+  });
 
   const [sorting, setSorting] = useState<SortingState>([
     {
       id: "name",
       desc: false,
     },
-  ])
+  ]);
 
-  const [data, setData] = useState<Item[]>([])
+  const [data, setData] = useState<Item[]>([]);
   useEffect(() => {
     async function fetchPosts() {
       const res = await fetch(
         "https://raw.githubusercontent.com/origin-space/origin-images/refs/heads/main/users-01_fertyx.json"
-      )
-      const data = await res.json()
-      setData(data)
+      );
+      const data = await res.json();
+      setData(data);
     }
-    fetchPosts()
-  }, [])
+    fetchPosts();
+  }, []);
 
   const table = useReactTable({
     data,
@@ -170,13 +170,13 @@ export default function Component() {
       sorting,
       pagination,
     },
-  })
+  });
 
   const { pages, showLeftEllipsis, showRightEllipsis } = usePagination({
     currentPage: table.getState().pagination.pageIndex + 1,
     totalPages: table.getPageCount(),
     paginationItemsToDisplay: 5,
-  })
+  });
 
   return (
     <div className="space-y-4">
@@ -205,8 +205,8 @@ export default function Component() {
                               header.column.getCanSort() &&
                               (e.key === "Enter" || e.key === " ")
                             ) {
-                              e.preventDefault()
-                              header.column.getToggleSortingHandler()?.(e)
+                              e.preventDefault();
+                              header.column.getToggleSortingHandler()?.(e);
                             }
                           }}
                           tabIndex={header.column.getCanSort() ? 0 : undefined}
@@ -239,7 +239,7 @@ export default function Component() {
                         )
                       )}
                     </TableHead>
-                  )
+                  );
                 })}
               </TableRow>
             ))}
@@ -317,7 +317,7 @@ export default function Component() {
               {/* Page number buttons */}
               {pages.map((page) => {
                 const isActive =
-                  page === table.getState().pagination.pageIndex + 1
+                  page === table.getState().pagination.pageIndex + 1;
                 return (
                   <PaginationItem key={page}>
                     <Button
@@ -329,7 +329,7 @@ export default function Component() {
                       {page}
                     </Button>
                   </PaginationItem>
-                )
+                );
               })}
 
               {/* Right ellipsis (...) */}
@@ -361,7 +361,7 @@ export default function Component() {
           <Select
             value={table.getState().pagination.pageSize.toString()}
             onValueChange={(value) => {
-              table.setPageSize(Number(value))
+              table.setPageSize(Number(value));
             }}
             aria-label="Results per page"
           >
@@ -393,5 +393,5 @@ export default function Component() {
         </a>
       </p>
     </div>
-  )
+  );
 }

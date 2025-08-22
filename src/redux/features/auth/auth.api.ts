@@ -49,13 +49,13 @@ export const authApi = apiSlice.injectEndpoints({
       providesTags: ["User"],
     }),
     getUsers: builder.query({
-      query: () => ({ url: "/api/users", method: "GET" }),
+      query: () => ({ url: "/api/user", method: "GET" }),
       providesTags: ["User"],
     }),
 
     blockUser: builder.mutation({
       query: (id) => ({
-        url: `/api/users/block/${id}`,
+        url: `/api/user/block/${id}`,
         method: "PATCH",
       }),
       invalidatesTags: ["User"],
@@ -63,7 +63,7 @@ export const authApi = apiSlice.injectEndpoints({
 
     unblockUser: builder.mutation({
       query: (id) => ({
-        url: `/api/users/unblock/${id}`,
+        url: `/api/user/unblock/${id}`,
         method: "PATCH",
       }),
       invalidatesTags: ["User"],

@@ -19,7 +19,6 @@ export function LoginForm({
   const { register, handleSubmit, reset } = useForm<LoginFormValues>();
   const [loginUser, { isLoading }] = useLoginUserMutation();
   const navigate = useNavigate();
-  console.log(loginUser);
 
   const onSubmit = async (data: LoginFormValues) => {
     try {

@@ -1,4 +1,4 @@
-import Users from "@/pages/Admin/Users";
+import ReceiverDashboard from "@/pages/Receiver/ReceiverDashboard";
 import type { ISidebarItem } from "@/types";
 
 export const ReceiverSidebarItems: ISidebarItem[] = [
@@ -6,9 +6,9 @@ export const ReceiverSidebarItems: ISidebarItem[] = [
     title: "Dashboard",
     items: [
       {
-        title: "Users",
-        url: "/receiver/users",
-        component: Users,
+        title: "Home",
+        url: "/receiver/dashboard",
+        component: ReceiverDashboard,
       },
     ],
   },

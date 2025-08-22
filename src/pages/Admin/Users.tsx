@@ -1,5 +1,9 @@
-import React from "react";
+import TableComp from "@/components/modules/Table";
 
 export default function Users() {
-  return <div>user</div>;
+  return (
+    <div>
+      <TableComp></TableComp>
+    </div>
+  );
 }
