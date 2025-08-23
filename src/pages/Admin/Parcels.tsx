@@ -1,3 +1,4 @@
+import LoadingSpinner from "@/components/LoadingSpinner";
 import ParcelCard from "@/components/ParcelCard";
 import { useGetAllParcelsQuery } from "@/redux/features/parcel/parcel.api";
 import type { IParcel } from "@/types";
@@ -5,11 +6,7 @@ import type { IParcel } from "@/types";
 export default function Parcels() {
   const { data: parcels, isLoading, error } = useGetAllParcelsQuery(undefined);
 
-  if (isLoading) {
-    return (
-      <p className="text-center py-8 text-foreground">Loading parcels...</p>
-    );
-  }
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 
   if (error) {
     return (

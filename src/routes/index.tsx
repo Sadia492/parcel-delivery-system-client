@@ -12,6 +12,8 @@ import { ReceiverSidebarItems } from "./ReceiverSidebarItems";
 import { withAuth } from "@/utils/withAuth";
 import type { TRole } from "@/types";
 import { role } from "@/constants/role";
+import Home from "@/pages/Home";
+import TrackParcel from "@/pages/TrackParcel";
 
 export const router = createBrowserRouter([
   {
@@ -19,12 +21,20 @@ export const router = createBrowserRouter([
     path: "/",
     children: [
       {
+        Component: Home,
+        path: "/",
+      },
+      {
         Component: About,
         path: "/about",
       },
       {
         Component: Contact,
         path: "/contact",
+      },
+      {
+        Component: TrackParcel,
+        path: "/track",
       },
     ],
   },

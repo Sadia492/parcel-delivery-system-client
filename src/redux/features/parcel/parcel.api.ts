@@ -47,6 +47,10 @@ export const parcelApi = apiSlice.injectEndpoints({
       query: () => ({ url: "/api/parcel/history", method: "GET" }),
       providesTags: ["Parcel"],
     }),
+    getTrackParcel: builder.query({
+      query: () => ({ url: "/api/parcel/track", method: "GET" }),
+      providesTags: ["Parcel"],
+    }),
     // Confirm delivery
     confirmDelivery: builder.mutation({
       query: ({ parcelId }) => ({
@@ -88,6 +92,7 @@ export const {
   useBlockParcelMutation,
   useGetIncomingParcelsQuery,
   useGetDeliveryHistoryQuery,
+  useGetTrackParcelQuery,
   useGetSenderParcelsQuery,
   useConfirmDeliveryMutation,
   useCancelParcelMutation,

@@ -49,11 +49,6 @@ export default function ParcelCard({ parcel }: Props) {
 
   const handleBlockUnblock = async () => {
     try {
-      console.log({
-        parcelId: parcel._id,
-        block: !parcel.isBlocked, // toggle block status
-        note: !parcel.isBlocked ? "Blocked by admin" : "Unblocked by admin",
-      });
       await blockParcel({
         parcelId: parcel._id,
         block: !parcel.isBlocked, // toggle block status

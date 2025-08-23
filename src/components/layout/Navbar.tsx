@@ -34,7 +34,7 @@ const navigationLinks = [
 
 export default function Navbar() {
   const { data } = useUserInfoQuery(undefined);
-  console.log(data);
+
   const [logout] = useLogoutMutation();
   const dispatch = useAppDispatch();
 

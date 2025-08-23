@@ -50,6 +50,7 @@ import {
   useGetUsersQuery,
   useUnblockUserMutation,
 } from "@/redux/features/auth/auth.api";
+import LoadingSpinner from "../LoadingSpinner";
 
 // ✅ Match your backend response
 type Item = {
@@ -198,7 +199,7 @@ export default function TableComp() {
     paginationItemsToDisplay: 5,
   });
 
-  if (isLoading) return <p className="text-center py-8">Loading users...</p>;
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>;
   if (error)
     return (
       <p className="text-center py-8 text-red-500">Failed to load users.</p>

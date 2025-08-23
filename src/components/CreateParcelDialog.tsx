@@ -71,7 +71,7 @@ export function CreateParcelDialog() {
 
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <DialogHeader>
+          <DialogHeader className="mb-2">
             <DialogTitle>Create Parcel</DialogTitle>
             <DialogDescription>
               Fill in the details to create a new parcel.
@@ -177,7 +177,7 @@ export function CreateParcelDialog() {
             </div>
 
             {/* Note */}
-            <div className="grid gap-2">
+            <div className="grid gap-2 mb-2">
               <Label htmlFor="note">Note</Label>
               <Input id="note" {...register("note")} />
             </div>

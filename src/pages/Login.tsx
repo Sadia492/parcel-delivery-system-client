@@ -1,17 +1,22 @@
 import { LoginForm } from "@/components/modules/Authentication/LoginForm";
-import { GalleryVerticalEnd } from "lucide-react";
+import img from "@/assets/11518583_4776675-removebg-preview.png";
+import Logo from "@/assets/icons/Logo";
+import { Link } from "react-router";
 
 export default function Login() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
-          <a href="#" className="flex items-center gap-2 font-medium">
-            <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
-              <GalleryVerticalEnd className="size-4" />
+          <Link
+            to="/"
+            className="flex text-primary items-center gap-2 font-medium"
+          >
+            <div className=" ">
+              <Logo />
             </div>
-            Acme Inc.
-          </a>
+            ParcelGuru
+          </Link>
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
@@ -19,11 +24,11 @@ export default function Login() {
           </div>
         </div>
       </div>
-      <div className="bg-muted relative hidden lg:block">
+      <div className="bg-muted hidden lg:flex items-center justify-center">
         <img
-          src="/placeholder.svg"
+          src={img}
           alt="Image"
-          className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+          className="max-w-full max-h-full object-contain"
         />
       </div>
     </div>

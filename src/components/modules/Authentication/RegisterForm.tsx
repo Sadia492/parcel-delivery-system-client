@@ -61,14 +61,13 @@ export function RegisterForm({
         ...data,
         isBlocked: "UNBLOCKED", // backend expects this
       };
-      console.log(payload);
+
       await registerUser(payload).unwrap();
 
       toast.success("User registered successfully!");
       navigate("/dashboard");
       reset();
     } catch (err: any) {
-      console.log(err);
       toast.error(err?.data?.message || "Registration failed");
     }
   };

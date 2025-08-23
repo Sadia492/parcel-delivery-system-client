@@ -1,4 +1,5 @@
 import { CreateParcelDialog } from "@/components/CreateParcelDialog";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import ParcelCard from "@/components/ParcelCard";
 import { useGetSenderParcelsQuery } from "@/redux/features/parcel/parcel.api";
 import type { IParcel } from "@/types";
@@ -10,11 +11,7 @@ export default function Parcels() {
     error,
   } = useGetSenderParcelsQuery(undefined);
 
-  if (isLoading) {
-    return (
-      <p className="text-center py-8 text-foreground">Loading parcels...</p>
-    );
-  }
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 
   if (error) {
     return (

@@ -12,8 +12,8 @@ export default function Footer() {
             </div>
 
             <p className="mt-4 max-w-xs text-muted-foreground">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse non
-              cupiditate quae nam molestias.
+              We are committed to providing the best parcel delivery service
+              with a focus on reliability, speed, and customer satisfaction.
             </p>
 
             <ul className="mt-8 flex gap-6">

@@ -8,7 +8,6 @@ interface IProps {
   children: ReactNode;
 }
 export default function MainLayout({ children }: IProps) {
-  console.log(generateRoutes(AdminSidebarItems));
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar></Navbar>

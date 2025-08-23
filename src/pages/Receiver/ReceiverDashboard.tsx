@@ -5,6 +5,7 @@ import {
 } from "@/redux/features/parcel/parcel.api";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-hot-toast";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export default function ReceiverDashboard() {
   const { data: incomingParcels, isLoading } =
@@ -21,12 +22,12 @@ export default function ReceiverDashboard() {
     }
   };
 
-  if (isLoading) return <p>Loading parcels...</p>;
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 
   return (
     <div className="p-4">
       <h2 className="text-xl font-bold mb-4">Incoming Parcels</h2>
-      {incomingParcels?.length === 0 ? (
+      {incomingParcels?.data?.length === 0 ? (
         <p>No parcels at the moment.</p>
       ) : (
         <ul className="space-y-2">
@@ -58,7 +59,7 @@ export default function ReceiverDashboard() {
       )}
 
       <h2 className="text-xl font-bold mt-8 mb-4">Delivery History</h2>
-      {history?.length === 0 ? (
+      {history?.data?.length === 0 ? (
         <p>No delivery history yet.</p>
       ) : (
         <ul className="space-y-2">
