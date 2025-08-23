@@ -37,7 +37,7 @@ export default function ParcelCard({ parcel }: Props) {
   const [blockParcel] = useBlockParcelMutation();
   const [cancelParcel] = useCancelParcelMutation();
   const { data } = useUserInfoQuery(undefined);
-
+  console.log(data);
   const handleUpdateStatus = async (status: ParcelStatus) => {
     try {
       await updateParcelStatus({ parcelId: parcel._id, status }).unwrap();
@@ -110,7 +110,7 @@ export default function ParcelCard({ parcel }: Props) {
 
         {/* Action buttons */}
         <div className="flex gap-2 mt-2 flex-wrap">
-          {data?.data?.role === "admin" ? (
+          {data?.data?.role === "ADMIN" ? (
             <>
               {/* Update Status Dialog */}
               <UpdateParcel

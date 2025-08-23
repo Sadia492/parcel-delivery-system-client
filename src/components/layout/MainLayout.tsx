@@ -1,8 +1,6 @@
 import type { ReactNode } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { generateRoutes } from "@/utils/generateRoutes";
-import { AdminSidebarItems } from "@/routes/AdminSidebarItems";
 
 interface IProps {
   children: ReactNode;

@@ -22,7 +22,7 @@ export function LoginForm({
 
   const onSubmit = async (data: LoginFormValues) => {
     try {
-      const response = await loginUser(data).unwrap();
+      await loginUser(data).unwrap();
 
       toast.success("Logged in successfully!");
       reset();

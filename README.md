@@ -1,69 +1,163 @@
-# React + TypeScript + Vite
+# 📦 Parcel Delivery Frontend (React + Redux Toolkit + RTK Query)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **secure, role-based, and user-friendly** frontend application for a **Parcel Delivery System** (similar to Pathao Courier or Sundarban), built with **React.js, Redux Toolkit, and RTK Query**.
 
-Currently, two official plugins are available:
+This application provides dashboards for **Senders, Receivers, and Admins**, offering seamless parcel management, authentication, and parcel tracking features.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Project Overview
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Public landing pages** with service information
+- **Role-based dashboards** with tailored features for Sender, Receiver, and Admin
+- **State management & API integration** via Redux Toolkit & RTK Query
+- **Responsive & clean UI** styled with Tailwind CSS
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+This project consumes the backend **Parcel Delivery API** to manage parcels, users, and tracking information.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🛠 Tech Stack
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### **Frontend**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- React (with TypeScript)
+- Redux Toolkit + RTK Query (state & API management)
+- React Router (routing)
+- Tailwind CSS (styling)
+- Toast library (notifications)
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### **Backend (API)**
+
+- Node.js + Express
+- MongoDB + Mongoose
+- JWT + bcrypt (authentication & security)
+
+---
+
+## ✨ Features
+
+### 🔓 Public Section
+
+- Home page (service intro)
+- About page (mission, services, team)
+- Contact page (inquiry form simulation)
+
+### 🔑 Authentication
+
+- Login with JWT
+- Register as **Sender** or **Receiver**
+- Role-based redirection
+- Persisted authentication state
+- Logout
+
+### 📤 Sender Dashboard
+
+- Create parcel delivery requests
+- Cancel parcels (if not dispatched)
+- View created parcels with status logs
+
+### 📥 Receiver Dashboard
+
+- View incoming parcels
+- Confirm parcel delivery
+- Delivery history
+
+### 👨‍💼 Admin Dashboard
+
+- Manage users (block/unblock)
+- Manage parcels (update status, block/unblock)
+- Assign delivery personnel (optional)
+
+### 📍 Parcel Tracking
+
+- Unique tracking ID for each parcel
+- Search parcels by tracking ID (public/authenticated)
+- Status logs with timestamps and notes
+
+### 📊 General & UI/UX
+
+- Role-based navigation menus
+- Loading indicators & error handling
+- Form validations & advanced filtering
+- Pagination for long lists
+- Toast notifications
+- Dashboard visualizations:
+
+  - Overview cards (total, delivered, pending, cancelled)
+  - Bar/pie charts for trends & distribution
+  - Paginated parcel tables with actions
+  - Timeline view of parcel history
+
+- Fully responsive & accessible design
+
+---
+
+## ⚙️ Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/Sadia492/parcel-delivery-system-client.git
+   cd parcel-delivery-frontend
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables**
+   Create a `.env` file in the root and add:
+
+   ```env
+   VITE_WebApi_URL=https://your-backend-api-url.com
+   ```
+
+4. **Run the app locally**
+
+   ```bash
+   npm run dev
+   ```
+
+---
+
+## ▶️ Usage
+
+- **Public users** can explore landing pages and track parcels using tracking IDs.
+- **Senders** can create and manage parcel requests.
+- **Receivers** can view and confirm parcels.
+- **Admins** can manage users and all parcels.
+
+---
+
+## 🔐 Authentication & Roles
+
+- **Sender** → Can create, cancel, and view their parcels
+- **Receiver** → Can confirm deliveries & view incoming parcels
+- **Admin** → Can manage users and parcels
+
+Authentication is persisted using **JWT tokens** stored securely.
+
+---
+
+## 📸 Screenshots / Demo
+
+> 📹 A demo video (5–10 mins) will showcase:
+
+- Login & registration flow
+- Sender, Receiver, and Admin dashboards
+- Parcel creation, cancellation, confirmation
+- Admin management features
+
+(Include screenshots or GIFs here if available)
+
+---
+
+## 🌍 Deployment
+
+- **Frontend Live URL:** [Your Deployed Frontend Link](#)
+- **Backend Live URL:** [Your Deployed Backend Link](#)
+
+---
