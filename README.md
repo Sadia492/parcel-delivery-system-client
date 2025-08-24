@@ -142,22 +142,19 @@ Authentication is persisted using **JWT tokens** stored securely.
 
 ---
 
-## 📸 Screenshots / Demo
+## 🧪 Demo Credentials
 
-> 📹 A demo video (5–10 mins) will showcase:
+You can use the following accounts to explore the dashboards in the live demo:
 
-- Login & registration flow
-- Sender, Receiver, and Admin dashboards
-- Parcel creation, cancellation, confirmation
-- Admin management features
-
-(Include screenshots or GIFs here if available)
-
----
+| Role         | Email / Username  | Password  |
+| ------------ | ----------------- | --------- |
+| **Admin**    | `zasil@gmail.com` | `zasil12` |
+| **Sender**   | `snig@gmail.com`  | `snig12`  |
+| **Receiver** | `amina@gmail.com` | `amina12` |
 
 ## 🌍 Deployment
 
-- **Frontend Live URL:** [Your Deployed Frontend Link](#)
-- **Backend Live URL:** [Your Deployed Backend Link](#)
+- **Frontend Live URL:** [Parcel Delivery Frontend](https://parcel-delivery-system-client.vercel.app/)
+- **Backend Live URL:** [Parcel Delivery Backend](https://parcel-delivery-system-server.vercel.app/)
 
 ---
