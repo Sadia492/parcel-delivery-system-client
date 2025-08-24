@@ -1,4 +1,4 @@
-# 📦 Parcel Delivery Frontend (React + Redux Toolkit + RTK Query)
+# 📦 ParcelGuru
 
 A **secure, role-based, and user-friendly** frontend application for a **Parcel Delivery System** (similar to Pathao Courier or Sundarban), built with **React.js, Redux Toolkit, and RTK Query**.
 
