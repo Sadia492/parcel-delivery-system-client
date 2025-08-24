@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import toast from "react-hot-toast";
 import { useRegisterUserMutation } from "@/redux/features/auth/auth.api";
 import Password from "@/components/ui/Password";
@@ -51,7 +51,7 @@ export function RegisterForm({
       role: "RECEIVER", // default role
     },
   });
-  const navigate = useNavigate();
+
   // 🔥 Redux RTK Query mutation hook
   const [registerUser, { isLoading }] = useRegisterUserMutation();
 
@@ -65,7 +65,6 @@ export function RegisterForm({
       await registerUser(payload).unwrap();
 
       toast.success("User registered successfully!");
-      navigate("/dashboard");
       reset();
     } catch (err: any) {
       toast.error(err?.data?.message || "Registration failed");
