@@ -54,12 +54,22 @@ export default function Banner() {
 
   return (
     <div className="w-full mb-5">
+      <style>{`
+        /* Use theme-aware colors for dots */
+        .slick-dots li button:before {
+          color: rgba(var(--foreground-rgb), 0.5) !important;
+        }
+        .slick-dots li.slick-active button:before {
+          color: rgba(var(--foreground-rgb), 1) !important;
+        }
+      `}</style>
+
       <Slider {...settings}>
         {slides.map((slide) => (
-          <div key={slide.id} className="relative max-h-[calc(100vh-100px)]">
+          <div key={slide.id} className="relative max-h-[calc(100vh-220px)]">
             <div className="relative w-full">
               {/* Background Overlay */}
-              <div className="absolute inset-0 bg-black opacity-20 z-10"></div>
+              <div className="absolute inset-0 bg-black opacity-40 z-10"></div>
 
               {/* Image */}
               <img

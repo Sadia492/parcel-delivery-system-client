@@ -118,3 +118,42 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* For slick carousel dots in dark mode */
+.slick-dots li button:before {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.slick-dots li.slick-active button:before {
+  color: black !important;
+}
+
+/* Light mode */
+:root,
+.light {
+  .slick-dots li button:before {
+    color: rgba(0, 0, 0, 0.5) !important;
+  }
+  .slick-dots li.slick-active button:before {
+    color: black !important;
+  }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .slick-dots li button:before {
+    color: rgba(255, 255, 255, 0.5) !important;
+  }
+  .slick-dots li.slick-active button:before {
+    color: white !important;
+  }
+}
+
+/* If using class-based dark mode */
+.dark .slick-dots li button:before {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.dark .slick-dots li.slick-active button:before {
+  color: white !important;
+}

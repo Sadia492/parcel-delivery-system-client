@@ -14,6 +14,11 @@ import type { TRole } from "@/types";
 import { role } from "@/constants/role";
 import Home from "@/pages/Home";
 import TrackParcel from "@/pages/TrackParcel";
+import AllParcels from "@/pages/AllParcels";
+import ParcelDetails from "@/pages/ParcelDetails";
+import HelpSupport from "@/pages/HelpSupport";
+import PrivacyPolicy from "@/pages/Privacy";
+import TermsConditions from "@/pages/Term";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +40,26 @@ export const router = createBrowserRouter([
       {
         Component: TrackParcel,
         path: "/track",
+      },
+      {
+        Component: AllParcels,
+        path: "/all-parcels",
+      },
+      {
+        Component: ParcelDetails,
+        path: "/parcel/:id",
+      },
+      {
+        Component: HelpSupport,
+        path: "/help",
+      },
+      {
+        Component: PrivacyPolicy,
+        path: "/privacy",
+      },
+      {
+        Component: TermsConditions,
+        path: "/terms",
       },
     ],
   },

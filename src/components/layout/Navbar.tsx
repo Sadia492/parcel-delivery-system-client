@@ -5,6 +5,8 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
+  NavigationMenuContent,
+  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import {
   Popover,
@@ -21,20 +23,106 @@ import {
 import { useAppDispatch } from "@/redux/hook";
 import { role } from "@/constants/role";
 import React from "react";
+import {
+  HelpCircle,
+  Shield,
+  FileText,
+  Home,
+  Package,
+  MapPin,
+  User,
+  Info,
+  Mail,
+  ChevronDown,
+  Users,
+} from "lucide-react";
 
-// Navigation links array to be used in both desktop and mobile menus
-const navigationLinks = [
-  { href: "/", label: "Home", role: "PUBLIC" },
-  { href: "/about", label: "About", role: "PUBLIC" },
-  { href: "/contact", label: "Contact", role: "PUBLIC" },
-  { href: "/admin", label: "Dashboard", role: role.admin },
-  { href: "/receiver", label: "Dashboard", role: role.receiver },
-  { href: "/sender", label: "Dashboard", role: role.sender },
+// Main navigation links
+const mainNavigationLinks = [
+  { href: "/", label: "Home", icon: <Home className="w-4 h-4" /> },
+  {
+    href: "/all-parcels",
+    label: "All Parcels",
+    icon: <Package className="w-4 h-4" />,
+  },
+  {
+    href: "/track",
+    label: "Track Parcel",
+    icon: <MapPin className="w-4 h-4" />,
+  },
+  { href: "/about", label: "About", icon: <Info className="w-4 h-4" /> },
+  { href: "/contact", label: "Contact", icon: <Mail className="w-4 h-4" /> },
+  { href: "/help", label: "Help", icon: <HelpCircle className="w-4 h-4" /> },
+];
+
+// Dashboard links (role-based)
+const dashboardLinks = [
+  {
+    href: "/admin",
+    label: "Admin Dashboard",
+    role: role.admin,
+    icon: <User className="w-4 h-4" />,
+  },
+  {
+    href: "/receiver",
+    label: "Receiver Dashboard",
+    role: role.receiver,
+    icon: <Package className="w-4 h-4" />,
+  },
+  {
+    href: "/sender",
+    label: "Sender Dashboard",
+    role: role.sender,
+    icon: <Users className="w-4 h-4" />,
+  },
+];
+
+// Mega Menu for Legal & Policies
+const legalPolicyItems = [
+  {
+    title: "Privacy Policy",
+    href: "/privacy",
+    description: "How we protect your data",
+    icon: <Shield className="w-5 h-5" />,
+  },
+  {
+    title: "Terms & Conditions",
+    href: "/terms",
+    description: "Our terms of service",
+    icon: <FileText className="w-5 h-5" />,
+  },
+];
+
+// Services Mega Menu (if you want to add more features)
+const servicesItems = [
+  {
+    title: "Same-Day Delivery",
+    href: "/services/same-day",
+    description: "Get your parcels delivered within hours",
+    icon: <Package className="w-5 h-5" />,
+  },
+  {
+    title: "Express Delivery",
+    href: "/services/express",
+    description: "Next-day delivery service",
+    icon: <Truck className="w-5 h-5" />,
+  },
+  {
+    title: "International Shipping",
+    href: "/services/international",
+    description: "Ship parcels worldwide",
+    icon: <Globe className="w-5 h-5" />,
+  },
+  {
+    title: "Business Solutions",
+    href: "/business",
+    description: "Corporate shipping solutions",
+    icon: <Briefcase className="w-5 h-5" />,
+  },
 ];
 
 export default function Navbar() {
   const { data } = useUserInfoQuery(undefined);
-
   const [logout] = useLogoutMutation();
   const dispatch = useAppDispatch();
 
@@ -43,8 +131,12 @@ export default function Navbar() {
     dispatch(authApi.util.resetApiState());
   };
 
+  const userDashboardLink = dashboardLinks.find(
+    (link) => link.role === data?.data?.role
+  );
+
   return (
-    <header className="border-b sticky top-0 z-50 bg-background">
+    <header className="border-b sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="w-11/12 mx-auto px-4 flex h-16 items-center justify-between gap-4">
         {/* Left side */}
         <div className="flex items-center gap-2">
@@ -83,32 +175,65 @@ export default function Navbar() {
                 </svg>
               </Button>
             </PopoverTrigger>
-            <PopoverContent align="start" className="w-36 p-1 md:hidden">
-              <NavigationMenu className="max-w-none *:w-full">
-                <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
-                  {navigationLinks.map((link, index) => (
-                    <React.Fragment key={index}>
-                      {link.role === "PUBLIC" && (
-                        <NavigationMenuItem className="w-full">
-                          <NavigationMenuLink asChild className="py-1.5">
-                            <Link to={link.href}>{link.label}</Link>
-                          </NavigationMenuLink>
-                        </NavigationMenuItem>
-                      )}
-                      {link.role === data?.data?.role && (
-                        <NavigationMenuItem className="w-full">
-                          <NavigationMenuLink asChild className="py-1.5">
-                            <Link to={link.href}>{link.label}</Link>
-                          </NavigationMenuLink>
-                        </NavigationMenuItem>
-                      )}
-                    </React.Fragment>
+            <PopoverContent align="start" className="w-64 p-3 md:hidden">
+              {/* Mobile Navigation */}
+              <div className="space-y-4">
+                {/* Main Links */}
+                <div className="space-y-2">
+                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    Navigation
+                  </h3>
+                  {mainNavigationLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      to={link.href}
+                      className="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-muted transition-colors"
+                    >
+                      {link.icon}
+                      {link.label}
+                    </Link>
                   ))}
-                </NavigationMenuList>
-              </NavigationMenu>
+                </div>
+
+                {/* Legal & Policies Dropdown */}
+                <div className="space-y-2">
+                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    Legal & Policies
+                  </h3>
+                  {legalPolicyItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      to={item.href}
+                      className="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-muted transition-colors"
+                    >
+                      {item.icon}
+                      <div>
+                        <div className="font-medium">{item.title}</div>
+                        <div className="text-xs text-muted-foreground">
+                          {item.description}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Dashboard Link (if logged in) */}
+                {userDashboardLink && (
+                  <div className="space-y-2 pt-4 border-t">
+                    <Link
+                      to={userDashboardLink.href}
+                      className="flex items-center gap-3 px-3 py-2 text-sm rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+                    >
+                      {userDashboardLink.icon}
+                      {userDashboardLink.label}
+                    </Link>
+                  </div>
+                )}
+              </div>
             </PopoverContent>
           </Popover>
-          {/* Main nav */}
+
+          {/* Desktop Navigation */}
           <div className="flex items-center gap-6">
             <Link
               to="/"
@@ -116,50 +241,174 @@ export default function Navbar() {
             >
               <Logo /> ParcelGuru
             </Link>
-            {/* Navigation menu */}
+
             <NavigationMenu className="max-md:hidden">
-              <NavigationMenuList className="gap-2">
-                {navigationLinks.map((link, index) => (
-                  <React.Fragment key={index}>
-                    {link.role === "PUBLIC" && (
-                      <NavigationMenuItem>
-                        <NavigationMenuLink
-                          asChild
-                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
-                        >
-                          <Link to={link.href}>{link.label}</Link>
-                        </NavigationMenuLink>
-                      </NavigationMenuItem>
-                    )}
-                    {link.role === data?.data?.role && (
-                      <NavigationMenuItem>
-                        <NavigationMenuLink
-                          asChild
-                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
-                        >
-                          <Link to={link.href}>{link.label}</Link>
-                        </NavigationMenuLink>
-                      </NavigationMenuItem>
-                    )}
-                  </React.Fragment>
+              <NavigationMenuList className="gap-1">
+                {/* Main Navigation Links */}
+                {mainNavigationLinks.map((link) => (
+                  <NavigationMenuItem key={link.href}>
+                    <NavigationMenuLink
+                      asChild
+                      className="text-muted-foreground hover:text-primary px-3 py-2 font-medium"
+                    >
+                      <Link to={link.href}>
+                        <div className="flex items-center gap-2">
+                          {link.icon}
+                          {link.label}
+                        </div>
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
                 ))}
+
+                {/* Legal & Policies Mega Menu */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-muted-foreground hover:text-primary px-3 py-2 font-medium">
+                    <div className="flex items-center gap-2">
+                      <Shield className="w-4 h-4" />
+                      Legal
+                      <ChevronDown className="w-3 h-3 ml-1 transition-transform duration-200" />
+                    </div>
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="w-[400px] p-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-3">
+                          <h3 className="font-semibold text-foreground">
+                            Policies
+                          </h3>
+                          {legalPolicyItems.map((item) => (
+                            <Link
+                              key={item.href}
+                              to={item.href}
+                              className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted transition-colors group"
+                            >
+                              <div className="p-2 rounded-md bg-primary/10 group-hover:bg-primary/20">
+                                {item.icon}
+                              </div>
+                              <div>
+                                <div className="font-medium text-foreground">
+                                  {item.title}
+                                </div>
+                                <div className="text-sm text-muted-foreground">
+                                  {item.description}
+                                </div>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                        <div className="space-y-3">
+                          <h3 className="font-semibold text-foreground">
+                            Compliance
+                          </h3>
+                          <div className="space-y-2">
+                            <div className="p-3 rounded-lg bg-muted/50">
+                              <div className="font-medium">GDPR Compliant</div>
+                              <div className="text-sm text-muted-foreground">
+                                We follow data protection regulations
+                              </div>
+                            </div>
+                            <div className="p-3 rounded-lg bg-muted/50">
+                              <div className="font-medium">
+                                Secure Transactions
+                              </div>
+                              <div className="text-sm text-muted-foreground">
+                                All payments are encrypted
+                              </div>
+                            </div>
+                            <div className="p-3 rounded-lg bg-muted/50">
+                              <div className="font-medium">Privacy First</div>
+                              <div className="text-sm text-muted-foreground">
+                                Your data is protected
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* Dashboard Link (if logged in) */}
+                {userDashboardLink && (
+                  <NavigationMenuItem>
+                    <NavigationMenuLink
+                      asChild
+                      className="text-primary hover:text-primary/80 px-3 py-2 font-medium"
+                    >
+                      <Link to={userDashboardLink.href}>
+                        <div className="flex items-center gap-2">
+                          {userDashboardLink.icon}
+                          Dashboard
+                        </div>
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                )}
               </NavigationMenuList>
             </NavigationMenu>
           </div>
         </div>
+
         {/* Right side */}
         <div className="flex items-center gap-2">
           <ModeToggle />
-          {data?.data?.email && (
-            <Button
-              onClick={handleLogout}
-              variant="outline"
-              className="text-sm"
-            >
-              Logout
-            </Button>
-          )}
-          {!data?.data?.email && (
+          {data?.data?.email ? (
+            <div className="flex items-center gap-2">
+              <Button
+                onClick={handleLogout}
+                variant="outline"
+                className="text-sm"
+              >
+                Logout
+              </Button>
+              {/* User Profile Dropdown */}
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="ghost" size="icon" className="rounded-full">
+                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                      <User className="w-4 h-4 text-primary" />
+                    </div>
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent align="end" className="w-56 p-2">
+                  <div className="space-y-2">
+                    <div className="px-3 py-2">
+                      <div className="font-medium truncate">
+                        {data.data.name || data.data.email}
+                      </div>
+                      <div className="text-sm text-muted-foreground truncate">
+                        {data.data.email}
+                      </div>
+                    </div>
+                    <div className="border-t">
+                      <Link
+                        to="/profile"
+                        className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-muted transition-colors"
+                      >
+                        <User className="w-4 h-4" />
+                        My Profile
+                      </Link>
+                      <Link
+                        to={userDashboardLink?.href || "/"}
+                        className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-muted transition-colors"
+                      >
+                        <Package className="w-4 h-4" />
+                        My Parcels
+                      </Link>
+                      <Link
+                        to="/settings"
+                        className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-muted transition-colors"
+                      >
+                        <Settings className="w-4 h-4" />
+                        Settings
+                      </Link>
+                    </div>
+                  </div>
+                </PopoverContent>
+              </Popover>
+            </div>
+          ) : (
             <Button asChild className="text-sm">
               <Link to="/login">Login</Link>
             </Button>
@@ -169,3 +418,6 @@ export default function Navbar() {
     </header>
   );
 }
+
+// Add these imports at the top if not already present
+import { Truck, Globe, Briefcase, Settings } from "lucide-react";
