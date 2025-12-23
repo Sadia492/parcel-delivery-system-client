@@ -7,7 +7,6 @@ import {
   Package,
   MapPin,
   Clock,
-  User,
   CheckCircle,
   Truck,
   AlertCircle,

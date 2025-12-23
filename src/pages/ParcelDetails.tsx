@@ -14,24 +14,17 @@ import {
   AlertCircle,
   FileText,
   DollarSign,
-  Hash,
-  Map,
   CheckCheck,
   XCircle,
   ShieldCheck,
   Home,
   Mail,
-  Phone,
   Weight,
   Navigation,
   ArrowLeft,
   File,
   RefreshCw,
-  Info,
-  ChevronRight,
   Check,
-  Circle,
-  ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -120,7 +113,6 @@ export default function ParcelDetails() {
   // Calculate progress percentage
   // Calculate progress percentage
   const calculateProgress = (status: TParcelStatus) => {
-    const currentIndex = statusFlow.indexOf(status);
     // Only count normal delivery steps: REQUESTED, APPROVED, DISPATCHED, DELIVERED
     const normalStatusFlow = statusFlow.filter((s) => s !== "CANCELED");
     const totalSteps = normalStatusFlow.length - 1; // Should be 3 for 4 steps (0-3)

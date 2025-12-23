@@ -22,7 +22,6 @@ import {
 } from "@/redux/features/auth/auth.api";
 import { useAppDispatch } from "@/redux/hook";
 import { role } from "@/constants/role";
-import React from "react";
 import {
   HelpCircle,
   Shield,
@@ -35,6 +34,7 @@ import {
   Mail,
   ChevronDown,
   Users,
+  Settings,
 } from "lucide-react";
 
 // Main navigation links
@@ -90,34 +90,6 @@ const legalPolicyItems = [
     href: "/terms",
     description: "Our terms of service",
     icon: <FileText className="w-5 h-5" />,
-  },
-];
-
-// Services Mega Menu (if you want to add more features)
-const servicesItems = [
-  {
-    title: "Same-Day Delivery",
-    href: "/services/same-day",
-    description: "Get your parcels delivered within hours",
-    icon: <Package className="w-5 h-5" />,
-  },
-  {
-    title: "Express Delivery",
-    href: "/services/express",
-    description: "Next-day delivery service",
-    icon: <Truck className="w-5 h-5" />,
-  },
-  {
-    title: "International Shipping",
-    href: "/services/international",
-    description: "Ship parcels worldwide",
-    icon: <Globe className="w-5 h-5" />,
-  },
-  {
-    title: "Business Solutions",
-    href: "/business",
-    description: "Corporate shipping solutions",
-    icon: <Briefcase className="w-5 h-5" />,
   },
 ];
 
@@ -418,6 +390,3 @@ export default function Navbar() {
     </header>
   );
 }
-
-// Add these imports at the top if not already present
-import { Truck, Globe, Briefcase, Settings } from "lucide-react";
