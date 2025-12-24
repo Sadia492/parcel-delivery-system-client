@@ -9,24 +9,18 @@ import {
   Globe,
   Briefcase,
   Star,
-  CheckCircle,
   MapPin,
-  DollarSign,
-  Calculator,
-  TrendingUp,
-  MessageSquare,
   Mail,
-  Heart,
-  Map,
-  Smartphone,
-  Lock,
 } from "lucide-react";
-import { useState } from "react";
 import { Link } from "react-router";
 
 export default function Home() {
-  const [weight, setWeight] = useState(1);
-  const [destination, setDestination] = useState("local");
+  // const [weight, setWeight] = useState(1);
+  // const [destination, setDestination] = useState("local");
+  // useEffect(() => {
+  //   setWeight(1);
+  //   setDestination("local");
+  // }, []);
 
   // Services data
   const services = [
@@ -69,12 +63,12 @@ export default function Home() {
   ];
 
   // Statistics data
-  const stats = [
-    { id: 1, value: "10,000+", label: "Parcels Delivered", icon: Package },
-    { id: 2, value: "5,000+", label: "Happy Customers", icon: Users },
-    { id: 3, value: "50+", label: "Cities Covered", icon: MapPin },
-    { id: 4, value: "98%", label: "On-time Delivery", icon: CheckCircle },
-  ];
+  // const stats = [
+  //   { id: 1, value: "10,000+", label: "Parcels Delivered", icon: Package },
+  //   { id: 2, value: "5,000+", label: "Happy Customers", icon: Users },
+  //   { id: 3, value: "50+", label: "Cities Covered", icon: MapPin },
+  //   { id: 4, value: "98%", label: "On-time Delivery", icon: CheckCircle },
+  // ];
 
   // Testimonials data
   const testimonials = [
@@ -131,11 +125,11 @@ export default function Home() {
   ];
 
   // Calculate price based on weight and destination
-  const calculatePrice = () => {
-    const basePrice =
-      destination === "local" ? 50 : destination === "intercity" ? 100 : 500;
-    return basePrice * weight;
-  };
+  // const calculatePrice = () => {
+  //   const basePrice =
+  //     destination === "local" ? 50 : destination === "intercity" ? 100 : 500;
+  //   return basePrice * weight;
+  // };
 
   return (
     <div>

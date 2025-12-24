@@ -1,4 +1,3 @@
-// components/DashboardNavbar.tsx
 import { useState } from "react";
 import {
   Bell,
@@ -37,20 +36,8 @@ import { useAppDispatch } from "@/redux/hook";
 import { role } from "@/constants/role";
 import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 
-interface DashboardNavbarProps {
-  onMenuClick?: () => void;
-}
-
-export function DashboardNavbar({ onMenuClick }: DashboardNavbarProps) {
+export function DashboardNavbar() {
   const { data } = useUserInfoQuery(undefined);
   const [logout] = useLogoutMutation();
   const dispatch = useAppDispatch();

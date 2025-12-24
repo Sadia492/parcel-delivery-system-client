@@ -5,25 +5,13 @@ import {
   Mail,
   Shield,
   Calendar,
-  Edit,
   Save,
-  X,
-  Lock,
   CheckCircle,
   AlertCircle,
   Package,
   Truck,
-  Home,
-  Settings,
-  Bell,
-  CreditCard,
-  History,
   HelpCircle,
-  LogOut,
   MapPin,
-  Phone,
-  Globe,
-  Briefcase,
   Activity,
   TrendingUp,
   Users,
@@ -38,17 +26,12 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-  CardFooter,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import {
-  useLogoutMutation,
-  useUserInfoQuery,
-} from "@/redux/features/auth/auth.api";
+import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import toast from "react-hot-toast";
 
 export default function ProfilePage() {
@@ -61,7 +44,7 @@ export default function ProfilePage() {
     error,
     refetch,
   } = useUserInfoQuery(undefined);
-  const [logout] = useLogoutMutation();
+  //   const [logout] = useLogoutMutation();
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedData, setEditedData] = useState<any>({});
@@ -73,14 +56,6 @@ export default function ProfilePage() {
   if (user && !Object.keys(editedData).length) {
     setEditedData(user);
   }
-
-  const handleEditToggle = () => {
-    if (isEditing) {
-      // Cancel edit
-      setEditedData(user);
-    }
-    setIsEditing(!isEditing);
-  };
 
   const handleSave = async () => {
     try {
@@ -101,16 +76,6 @@ export default function ProfilePage() {
       ...prev,
       [field]: value,
     }));
-  };
-
-  const handleLogout = async () => {
-    try {
-      await logout(undefined).unwrap();
-      toast.success("Logged out successfully");
-      navigate("/login");
-    } catch (error) {
-      toast.error("Failed to logout. Please try again.");
-    }
   };
 
   const formatDate = (dateString: string | { $date: string }) => {
@@ -170,12 +135,12 @@ export default function ProfilePage() {
   };
 
   // Generate avatar URL from name
-  const getAvatarUrl = (name?: string, email?: string) => {
-    const seed = name || email || "user";
-    return `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(
-      seed
-    )}`;
-  };
+  //   const getAvatarUrl = (name?: string, email?: string) => {
+  //     const seed = name || email || "user";
+  //     return `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(
+  //       seed
+  //     )}`;
+  //   };
 
   // Get initials for avatar fallback
   const getInitials = (name?: string) => {
