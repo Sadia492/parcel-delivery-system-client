@@ -19,6 +19,7 @@ import ParcelDetails from "@/pages/ParcelDetails";
 import HelpSupport from "@/pages/HelpSupport";
 import PrivacyPolicy from "@/pages/Privacy";
 import TermsConditions from "@/pages/Term";
+import ProfilePage from "@/pages/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +61,14 @@ export const router = createBrowserRouter([
       {
         Component: TermsConditions,
         path: "/terms",
+      },
+      {
+        Component: withAuth(ProfilePage, [
+          role.admin as TRole,
+          role.sender as TRole,
+          role.receiver as TRole,
+        ]),
+        path: "/profile",
       },
     ],
   },
