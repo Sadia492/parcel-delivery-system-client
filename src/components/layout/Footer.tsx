@@ -1,4 +1,5 @@
 import Logo from "@/assets/icons/Logo";
+import { Link } from "react-router";
 
 export default function Footer() {
   return (
@@ -19,7 +20,7 @@ export default function Footer() {
             <ul className="mt-8 flex gap-6">
               <li>
                 <a
-                  href="#"
+                  href="https://www.facebook.com/snigdha.afrin492"
                   rel="noreferrer"
                   target="_blank"
                   className="text-foreground/80 transition hover:text-foreground"
@@ -43,7 +44,7 @@ export default function Footer() {
 
               <li>
                 <a
-                  href="#"
+                  href="https://www.instagram.com/"
                   rel="noreferrer"
                   target="_blank"
                   className="text-foreground/80 transition hover:text-foreground"
@@ -67,7 +68,7 @@ export default function Footer() {
 
               <li>
                 <a
-                  href="#"
+                  href="https://x.com/"
                   rel="noreferrer"
                   target="_blank"
                   className="text-foreground/80 transition hover:text-foreground"
@@ -87,7 +88,7 @@ export default function Footer() {
 
               <li>
                 <a
-                  href="#"
+                  href="https://github.com/Sadia492"
                   rel="noreferrer"
                   target="_blank"
                   className="text-foreground/80 transition hover:text-foreground"
@@ -111,7 +112,7 @@ export default function Footer() {
 
               <li>
                 <a
-                  href="#"
+                  href="https://dribbble.com/"
                   rel="noreferrer"
                   target="_blank"
                   className="text-foreground/80 transition hover:text-foreground"
@@ -135,95 +136,28 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
-            <div>
-              <p className="font-medium text-foreground/90">Services</p>
-
-              <ul className="mt-6 space-y-4 text-sm">
-                <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    1on1 Coaching{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    Company Review{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    Accounts Review{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    HR Consulting{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    SEO Optimisation{" "}
-                  </a>
-                </li>
-              </ul>
-            </div>
-
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-3">
             <div>
               <p className="font-medium text-foreground/90">Company</p>
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to="/about"
                     className="text-foreground/90 transition hover:text-foreground/60"
                   >
                     {" "}
                     About{" "}
-                  </a>
+                  </Link>
                 </li>
 
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to="/contact"
                     className="text-foreground/90 transition hover:text-foreground/60"
                   >
-                    {" "}
-                    Meet the Team{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    Accounts Review{" "}
-                  </a>
+                    Contact Us
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -233,33 +167,22 @@ export default function Footer() {
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to="/help"
                     className="text-foreground/90 transition hover:text-foreground/60"
                   >
-                    {" "}
-                    Contact{" "}
-                  </a>
+                    Help
+                  </Link>
                 </li>
 
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to="/help"
                     className="text-foreground/90 transition hover:text-foreground/60"
                   >
                     {" "}
                     FAQs{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    Live Chat{" "}
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -269,42 +192,21 @@ export default function Footer() {
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to="/privacy-policy"
                     className="text-foreground/90 transition hover:text-foreground/60"
                   >
-                    {" "}
-                    Accessibility{" "}
-                  </a>
+                    Privacy Policy
+                  </Link>
                 </li>
 
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to="/terms"
                     className="text-foreground/90 transition hover:text-foreground/60"
                   >
-                    {" "}
-                    Returns Policy{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    Refund Policy{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    Hiring-3 Statistics
-                  </a>
+                    Term & Conditions
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -312,7 +214,7 @@ export default function Footer() {
         </div>
 
         <p className="text-xs text-muted-foreground">
-          &copy; 2022. Company Name. All rights reserved.
+          &copy; 2025. Company Name. All rights reserved.
         </p>
       </div>
     </footer>

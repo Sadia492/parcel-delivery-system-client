@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import { useGetAllParcelsQuery } from "@/redux/features/parcel/parcel.api";
+import { useGetTrackParcelQuery } from "@/redux/features/parcel/parcel.api";
 import type { IParcel, TParcelStatus, IStatusLog } from "@/types";
 import {
   Calendar,
@@ -30,7 +30,7 @@ import { Button } from "@/components/ui/button";
 
 export default function ParcelDetails() {
   const { id } = useParams<{ id: string }>();
-  const { data, isLoading, error } = useGetAllParcelsQuery(undefined);
+  const { data, isLoading, error } = useGetTrackParcelQuery(undefined);
   const [parcel, setParcel] = useState<IParcel | null>(null);
 
   // Status flow order
@@ -146,7 +146,7 @@ export default function ParcelDetails() {
           <p className="text-muted-foreground mb-6">
             The parcel you're looking for doesn't exist or couldn't be loaded.
           </p>
-          <Link to="/parcels">
+          <Link to="/all-parcels">
             <Button className="gap-2">
               <ArrowLeft className="w-4 h-4" />
               Back to All Parcels
