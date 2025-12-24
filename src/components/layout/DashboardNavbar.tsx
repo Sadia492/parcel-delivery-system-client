@@ -1,17 +1,17 @@
 // components/DashboardNavbar.tsx
 import { useState } from "react";
 import {
-  Home,
   Bell,
   HelpCircle,
   User,
-  Settings,
   LogOut,
   Package,
   Users,
   Shield,
   Search,
-  Menu,
+  Home,
+  Settings,
+  ChevronDown,
 } from "lucide-react";
 import { Link } from "react-router";
 import { ModeToggle } from "./ModeToggler";
@@ -36,6 +36,15 @@ import {
 import { useAppDispatch } from "@/redux/hook";
 import { role } from "@/constants/role";
 import toast from "react-hot-toast";
+import { cn } from "@/lib/utils";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 interface DashboardNavbarProps {
   onMenuClick?: () => void;
@@ -46,6 +55,7 @@ export function DashboardNavbar({ onMenuClick }: DashboardNavbarProps) {
   const [logout] = useLogoutMutation();
   const dispatch = useAppDispatch();
   const [searchQuery, setSearchQuery] = useState("");
+  const [showSearch, setShowSearch] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -61,12 +71,18 @@ export function DashboardNavbar({ onMenuClick }: DashboardNavbarProps) {
   const userRole = data?.data?.role;
   const userName = data?.data?.name || "User";
   const userEmail = data?.data?.email || "";
+  const userInitials = userName
+    .split(" ")
+    .map((n: any) => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
 
   // Get role-specific dashboard title
   const getDashboardTitle = () => {
     switch (userRole) {
       case role.admin:
-        return "Admin Dashboard";
+        return "Admin Panel";
       case role.sender:
         return "Sender Dashboard";
       case role.receiver:
@@ -76,17 +92,17 @@ export function DashboardNavbar({ onMenuClick }: DashboardNavbarProps) {
     }
   };
 
-  // Get role icon
-  const getRoleIcon = () => {
+  // Get role color
+  const getRoleColor = () => {
     switch (userRole) {
       case role.admin:
-        return <Shield className="w-4 h-4" />;
+        return "bg-red-500";
       case role.sender:
-        return <Package className="w-4 h-4" />;
+        return "bg-blue-500";
       case role.receiver:
-        return <Users className="w-4 h-4" />;
+        return "bg-green-500";
       default:
-        return <User className="w-4 h-4" />;
+        return "bg-gray-500";
     }
   };
 
@@ -117,69 +133,96 @@ export function DashboardNavbar({ onMenuClick }: DashboardNavbarProps) {
   const unreadCount = notifications.filter((n) => n.unread).length;
 
   return (
-    <header className="sticky top-0 z-50 flex h-16 items-center gap-4 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 md:px-6">
-      {/* Left side: Menu toggle and breadcrumb */}
-      <div className="flex items-center gap-4">
-        <SidebarTrigger className="-ml-1" />
-        <Separator orientation="vertical" className="h-6" />
+    <header className="sticky top-0 z-50 flex h-16 items-center gap-2 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-3 sm:px-4 md:px-6">
+      {/* Left side: Menu toggle and title */}
+      <div className="flex items-center gap-2 flex-1 min-w-0">
+        <SidebarTrigger className="-ml-1 h-9 w-9" />
 
-        <div className="flex items-center gap-2">
-          <div className="hidden md:flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+        <Separator orientation="vertical" className="h-6 hidden sm:block" />
+
+        <div className="flex items-center gap-2 min-w-0">
+          <div className="hidden sm:flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
               <Package className="w-4 h-4 text-primary" />
             </div>
-            <Separator orientation="vertical" className="h-6" />
           </div>
-          <div>
-            <h1 className="text-lg font-semibold text-foreground">
+
+          <div className="min-w-0">
+            <h1 className="text-base sm:text-lg font-semibold text-foreground truncate">
               {getDashboardTitle()}
             </h1>
-            <p className="text-xs text-muted-foreground hidden sm:block">
+            <p className="text-xs text-muted-foreground truncate hidden sm:block">
               Welcome back, {userName}
             </p>
           </div>
         </div>
       </div>
 
-      {/* Center: Search Bar (Desktop only) */}
-      <div className="hidden lg:flex flex-1 max-w-md mx-4">
-        <div className="relative w-full">
+      {/* Center: Search Bar - Responsive */}
+      <div
+        className={cn(
+          "transition-all duration-200",
+          showSearch
+            ? "absolute inset-x-0 top-16 px-4 py-2 bg-background border-b shadow-lg"
+            : "hidden lg:flex flex-1 max-w-lg"
+        )}
+      >
+        <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
             type="search"
             placeholder="Search parcels, transactions..."
-            className="pl-10"
+            className="pl-10 pr-10"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
+          {showSearch && (
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute right-1 top-1/2 transform -translate-y-1/2 h-7 w-7"
+              onClick={() => setShowSearch(false)}
+            >
+              <span className="text-lg">×</span>
+            </Button>
+          )}
         </div>
       </div>
 
       {/* Right side: User controls */}
-      <div className="ml-auto flex items-center gap-2">
+      <div className="flex items-center gap-1 sm:gap-2">
         {/* Mobile Search Toggle */}
         <Button
           variant="ghost"
           size="icon"
-          className="lg:hidden"
-          onClick={() => {
-            /* Add search modal toggle */
-          }}
+          className="lg:hidden h-9 w-9"
+          onClick={() => setShowSearch(!showSearch)}
         >
           <Search className="w-5 h-5" />
         </Button>
 
-        {/* Notifications */}
+        {/* Notifications - Mobile optimized */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="relative">
+            <Button variant="ghost" size="icon" className="relative h-9 w-9">
               <Bell className="w-5 h-5" />
               {unreadCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                <>
+                  <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-red-500 rounded-full animate-pulse hidden sm:block"></span>
+                  <Badge
+                    variant="destructive"
+                    className="absolute -top-2 -right-2 h-5 min-w-5 px-1 text-xs sm:hidden"
+                  >
+                    {unreadCount}
+                  </Badge>
+                </>
               )}
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-80">
+          <DropdownMenuContent
+            align="end"
+            className="w-72 sm:w-80 max-h-[80vh] overflow-y-auto"
+          >
             <DropdownMenuLabel className="flex justify-between items-center">
               <span>Notifications</span>
               {unreadCount > 0 && (
@@ -193,19 +236,19 @@ export function DashboardNavbar({ onMenuClick }: DashboardNavbarProps) {
               {notifications.map((notification) => (
                 <DropdownMenuItem
                   key={notification.id}
-                  className="p-3 cursor-default"
+                  className="p-3 cursor-default focus:bg-transparent"
                 >
                   <div
-                    className={`flex items-start gap-3 ${
-                      notification.unread
-                        ? "bg-primary/5 rounded-lg -mx-2 -my-1 p-2"
-                        : ""
-                    }`}
+                    className={cn(
+                      "flex items-start gap-3 w-full",
+                      notification.unread && "bg-primary/5 rounded-lg p-2 -mx-2"
+                    )}
                   >
                     <div
-                      className={`p-2 rounded-full ${
+                      className={cn(
+                        "p-2 rounded-full flex-shrink-0",
                         notification.unread ? "bg-primary/10" : "bg-muted"
-                      }`}
+                      )}
                     >
                       <Bell className="w-4 h-4" />
                     </div>
@@ -221,7 +264,7 @@ export function DashboardNavbar({ onMenuClick }: DashboardNavbarProps) {
                       </p>
                     </div>
                     {notification.unread && (
-                      <div className="w-2 h-2 rounded-full bg-primary mt-2"></div>
+                      <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
                     )}
                   </div>
                 </DropdownMenuItem>
@@ -229,15 +272,20 @@ export function DashboardNavbar({ onMenuClick }: DashboardNavbarProps) {
             </div>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild className="cursor-pointer">
-              <Link to="/dashboard/notifications" className="w-full">
+              <Link to="/notifications" className="w-full">
                 View all notifications
               </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
 
-        {/* Help */}
-        <Button variant="ghost" size="icon" asChild>
+        {/* Help - Hide on mobile, show in dropdown */}
+        <Button
+          variant="ghost"
+          size="icon"
+          asChild
+          className="hidden sm:inline-flex h-9 w-9"
+        >
           <Link to="/help">
             <HelpCircle className="w-5 h-5" />
           </Link>
@@ -246,14 +294,27 @@ export function DashboardNavbar({ onMenuClick }: DashboardNavbarProps) {
         {/* Theme Toggle */}
         <ModeToggle />
 
-        {/* User Profile Dropdown */}
+        {/* User Profile Dropdown - Mobile optimized */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="gap-2 px-2">
-              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                {getRoleIcon()}
+            <Button
+              variant="ghost"
+              className={cn(
+                "gap-1 sm:gap-2 px-1 sm:px-2 h-9",
+                "overflow-hidden min-w-0"
+              )}
+            >
+              <div className="relative">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary/10 flex items-center justify-center text-sm font-medium flex-shrink-0">
+                  {userInitials}
+                </div>
+                <div
+                  className={`absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full border-2 border-background ${getRoleColor()}`}
+                />
               </div>
-              <div className="hidden md:block text-left">
+
+              {/* Show only on larger screens */}
+              <div className="hidden md:block text-left min-w-0">
                 <div className="text-sm font-medium truncate max-w-[120px]">
                   {userName}
                 </div>
@@ -261,13 +322,31 @@ export function DashboardNavbar({ onMenuClick }: DashboardNavbarProps) {
                   {userRole?.toLowerCase()}
                 </div>
               </div>
+
+              {/* Show only role on medium screens */}
+              <div className="hidden sm:block md:hidden">
+                <Badge variant="outline" className="text-xs capitalize px-1.5">
+                  {userRole?.slice(0, 1)}
+                </Badge>
+              </div>
+
+              <ChevronDown className="w-4 h-4 text-muted-foreground hidden sm:block flex-shrink-0" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-64">
+          <DropdownMenuContent
+            align="end"
+            className="w-64 sm:w-72"
+            sideOffset={8}
+          >
             <DropdownMenuLabel>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  {getRoleIcon()}
+                <div className="relative">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-sm font-medium">
+                    {userInitials}
+                  </div>
+                  <div
+                    className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-background ${getRoleColor()}`}
+                  />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium truncate">{userName}</p>
@@ -275,7 +354,19 @@ export function DashboardNavbar({ onMenuClick }: DashboardNavbarProps) {
                     {userEmail}
                   </p>
                   <div className="flex items-center gap-1 mt-1">
-                    <Badge variant="outline" className="text-xs capitalize">
+                    <Badge
+                      variant="outline"
+                      className="text-xs capitalize flex items-center gap-1"
+                    >
+                      {userRole === role.admin && (
+                        <Shield className="w-3 h-3" />
+                      )}
+                      {userRole === role.sender && (
+                        <Package className="w-3 h-3" />
+                      )}
+                      {userRole === role.receiver && (
+                        <Users className="w-3 h-3" />
+                      )}
                       {userRole?.toLowerCase()}
                     </Badge>
                   </div>
@@ -284,50 +375,91 @@ export function DashboardNavbar({ onMenuClick }: DashboardNavbarProps) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
 
-            <DropdownMenuItem asChild className="cursor-pointer">
-              <Link to="/dashboard">
-                <Home className="w-4 h-4 mr-2" />
-                Dashboard Home
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild className="cursor-pointer">
-              <Link to="/profile">
-                <User className="w-4 h-4 mr-2" />
-                My Profile
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild className="cursor-pointer">
-              <Link to="/dashboard/parcels">
-                <Package className="w-4 h-4 mr-2" />
-                Manage Parcels
-              </Link>
-            </DropdownMenuItem>
-
-            {userRole === role.admin && (
-              <DropdownMenuItem asChild className="cursor-pointer">
-                <Link to="/dashboard/users">
-                  <Users className="w-4 h-4 mr-2" />
-                  Manage Users
+            {/* Quick Links - Mobile friendly */}
+            <div className="grid grid-cols-2 gap-1 p-2">
+              <DropdownMenuItem
+                asChild
+                className="cursor-pointer justify-center"
+              >
+                <Link to="/" className="flex flex-col items-center p-2 rounded">
+                  <Home className="w-4 h-4 mb-1" />
+                  <span className="text-xs">Home</span>
                 </Link>
               </DropdownMenuItem>
-            )}
+
+              <DropdownMenuItem
+                asChild
+                className="cursor-pointer justify-center"
+              >
+                <Link
+                  to="/profile"
+                  className="flex flex-col items-center p-2 rounded"
+                >
+                  <User className="w-4 h-4 mb-1" />
+                  <span className="text-xs">Profile</span>
+                </Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem
+                asChild
+                className="cursor-pointer justify-center"
+              >
+                <Link
+                  to="/parcels"
+                  className="flex flex-col items-center p-2 rounded"
+                >
+                  <Package className="w-4 h-4 mb-1" />
+                  <span className="text-xs">Parcels</span>
+                </Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem
+                asChild
+                className="cursor-pointer justify-center"
+              >
+                <Link
+                  to="/help"
+                  className="flex flex-col items-center p-2 rounded"
+                >
+                  <HelpCircle className="w-4 h-4 mb-1" />
+                  <span className="text-xs">Help</span>
+                </Link>
+              </DropdownMenuItem>
+            </div>
 
             <DropdownMenuSeparator />
 
-            <DropdownMenuItem asChild className="cursor-pointer">
-              <Link to="/help">
-                <HelpCircle className="w-4 h-4 mr-2" />
-                Help & Support
-              </Link>
-            </DropdownMenuItem>
+            {/* Full menu items */}
+            <div className="space-y-1">
+              {userRole === role.admin && (
+                <DropdownMenuItem asChild className="cursor-pointer">
+                  <Link to="/dashboard/users" className="w-full">
+                    <Users className="w-4 h-4 mr-2" />
+                    Manage Users
+                  </Link>
+                </DropdownMenuItem>
+              )}
+
+              <DropdownMenuItem asChild className="cursor-pointer">
+                <Link to="/dashboard/analytics" className="w-full">
+                  <Settings className="w-4 h-4 mr-2" />
+                  Analytics
+                </Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem asChild className="cursor-pointer">
+                <Link to="/settings" className="w-full">
+                  <Settings className="w-4 h-4 mr-2" />
+                  Settings
+                </Link>
+              </DropdownMenuItem>
+            </div>
 
             <DropdownMenuSeparator />
 
             <DropdownMenuItem
               onClick={handleLogout}
-              className="cursor-pointer text-red-600 focus:text-red-600"
+              className="cursor-pointer text-red-600 focus:text-red-600 focus:bg-red-50"
             >
               <LogOut className="w-4 h-4 mr-2" />
               Logout

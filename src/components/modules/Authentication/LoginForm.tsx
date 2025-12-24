@@ -60,11 +60,6 @@ export function LoginForm({
   const fillCredentials = (user: DemoUser) => {
     setValue("email", user.email);
     setValue("password", user.password);
-    toast.success(
-      `${
-        user.role.charAt(0).toUpperCase() + user.role.slice(1)
-      } credentials filled!`
-    );
   };
 
   const onSubmit = async (data: LoginFormValues) => {
