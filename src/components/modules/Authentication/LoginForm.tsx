@@ -5,7 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link, useNavigate } from "react-router";
 import toast from "react-hot-toast";
-import { useLoginUserMutation } from "@/redux/features/auth/auth.api";
+import {
+  useLoginUserMutation,
+  useUserInfoQuery,
+} from "@/redux/features/auth/auth.api";
 import { useState } from "react";
 import { Eye, EyeOff, User, Shield, Package, Users } from "lucide-react";
 
@@ -30,6 +33,7 @@ export function LoginForm({
     useForm<LoginFormValues>();
   const [loginUser, { isLoading }] = useLoginUserMutation();
   const navigate = useNavigate();
+  const { data: user } = useUserInfoQuery(undefined);
   const [showPassword, setShowPassword] = useState(false);
 
   // Demo users with different roles
@@ -61,13 +65,31 @@ export function LoginForm({
     setValue("email", user.email);
     setValue("password", user.password);
   };
-
   const onSubmit = async (data: LoginFormValues) => {
     try {
-      await loginUser(data).unwrap();
-      toast.success("Logged in successfully!");
-      reset();
-      navigate("/");
+      const response = await loginUser(data).unwrap();
+      if (response?.success && user?.success) {
+        // Navigate based on role
+        let redirectPath = "/";
+
+        switch (user?.data?.role) {
+          case "ADMIN":
+            redirectPath = "/admin/dashboard";
+            break;
+          case "SENDER":
+            redirectPath = "/sender/dashboard";
+            break;
+          case "RECEIVER":
+            redirectPath = "/receiver/dashboard";
+            break;
+          default:
+            redirectPath = "/";
+        }
+
+        toast.success(`Logged in successfully as ${user?.role}!`);
+        reset();
+        navigate(redirectPath);
+      }
     } catch (err: any) {
       console.error("Login error:", err);
       const message = err?.data?.message;
