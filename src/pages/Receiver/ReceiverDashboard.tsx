@@ -283,10 +283,10 @@ export default function ReceiverDashboard() {
         <CardContent className="pt-6">
           <div className="text-center py-12">
             <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-lg font-semibold  mb-2">
               Failed to Load Dashboard
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className=" mb-4">
               Unable to fetch your dashboard data. Please try again later.
             </p>
             <Button onClick={() => refetchReceiverData()}>Retry</Button>
@@ -301,10 +301,8 @@ export default function ReceiverDashboard() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">
-            Receiver Dashboard
-          </h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className="text-3xl font-bold ">Receiver Dashboard</h1>
+          <p className=" mt-2">
             Welcome back,{" "}
             <span className="font-semibold text-green-600">{user?.name}</span>!
             Here's an overview of your parcel deliveries.
@@ -354,13 +352,9 @@ export default function ReceiverDashboard() {
                   {stat.growth.toFixed(1)}%
                 </Badge>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">
-                {stat.value}
-              </h3>
-              <p className="text-sm font-medium text-gray-700 mb-1">
-                {stat.title}
-              </p>
-              <p className="text-xs text-gray-500">{stat.description}</p>
+              <h3 className="text-2xl font-bold  mb-1">{stat.value}</h3>
+              <p className="text-sm font-medium  mb-1">{stat.title}</p>
+              <p className="text-xs ">{stat.description}</p>
             </CardContent>
           </Card>
         ))}
@@ -390,16 +384,14 @@ export default function ReceiverDashboard() {
                         <CheckCircle className="w-5 h-5 text-green-600" />
                       </div>
                       <div>
-                        <p className="font-medium text-gray-700">
-                          Delivery Success Rate
-                        </p>
-                        <p className="text-2xl font-bold text-gray-900">
+                        <p className="font-medium ">Delivery Success Rate</p>
+                        <p className="text-2xl font-bold ">
                           {deliverySuccessRate}%
                         </p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm text-gray-600">Completed</p>
+                      <p className="text-sm ">Completed</p>
                       <p className="text-xl font-bold text-green-600">
                         {stats?.completedDeliveries || 0}/
                         {stats?.receiverParcels || 0}
@@ -420,8 +412,8 @@ export default function ReceiverDashboard() {
                         <CheckCircle className="w-5 h-5 text-green-600" />
                       </div>
                       <div>
-                        <p className="text-sm text-gray-600">Delivered</p>
-                        <p className="text-xl font-bold text-gray-900">
+                        <p className="text-sm ">Delivered</p>
+                        <p className="text-xl font-bold ">
                           {statusBreakdown.delivered}
                         </p>
                       </div>
@@ -434,8 +426,8 @@ export default function ReceiverDashboard() {
                         <Clock className="w-5 h-5 text-blue-600" />
                       </div>
                       <div>
-                        <p className="text-sm text-gray-600">Approved</p>
-                        <p className="text-xl font-bold text-gray-900">
+                        <p className="text-sm ">Approved</p>
+                        <p className="text-xl font-bold ">
                           {statusBreakdown.approved}
                         </p>
                       </div>
@@ -448,8 +440,8 @@ export default function ReceiverDashboard() {
                         <AlertCircle className="w-5 h-5 text-red-600" />
                       </div>
                       <div>
-                        <p className="text-sm text-gray-600">Canceled</p>
-                        <p className="text-xl font-bold text-gray-900">
+                        <p className="text-sm ">Canceled</p>
+                        <p className="text-xl font-bold ">
                           {statusBreakdown.canceled}
                         </p>
                       </div>
@@ -459,20 +451,18 @@ export default function ReceiverDashboard() {
 
                 {/* Parcel Types */}
                 <div>
-                  <h4 className="font-medium text-gray-700 mb-3">
-                    Parcel Types Received
-                  </h4>
+                  <h4 className="font-medium  mb-3">Parcel Types Received</h4>
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-blue-500"></div>
-                      <span className="text-sm text-gray-600">Packages</span>
+                      <span className="text-sm ">Packages</span>
                       <Badge variant="outline" className="ml-2">
                         {packageCount}
                       </Badge>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 rounded-full bg-purple-500"></div>
-                      <span className="text-sm text-gray-600">Documents</span>
+                      <span className="text-sm ">Documents</span>
                       <Badge variant="outline" className="ml-2">
                         {documentCount}
                       </Badge>
@@ -537,19 +527,17 @@ export default function ReceiverDashboard() {
               <Separator className="my-3" />
 
               <div className="space-y-2">
-                <h4 className="font-medium text-gray-700 text-sm">
-                  Quick Stats
-                </h4>
+                <h4 className="font-medium  text-sm">Quick Stats</h4>
                 <div className="grid grid-cols-2 gap-2">
                   <div className="p-2 rounded-lg bg-gray-50">
-                    <p className="text-xs text-gray-500">Total Weight</p>
-                    <p className="font-bold text-gray-900">
+                    <p className="text-xs ">Total Weight</p>
+                    <p className="font-bold ">
                       {totalWeightReceived.toFixed(1)}kg
                     </p>
                   </div>
                   <div className="p-2 rounded-lg bg-gray-50">
-                    <p className="text-xs text-gray-500">Avg. Weight</p>
-                    <p className="font-bold text-gray-900">
+                    <p className="text-xs ">Avg. Weight</p>
+                    <p className="font-bold ">
                       {averageParcelWeight.toFixed(1)}kg
                     </p>
                   </div>
@@ -609,7 +597,7 @@ export default function ReceiverDashboard() {
                         </div>
                         <div className="min-w-0">
                           <div className="flex items-center gap-2">
-                            <p className="font-medium text-sm text-gray-900 truncate">
+                            <p className="font-medium text-sm  truncate">
                               {parcel.trackingId}
                             </p>
                             <Badge
@@ -628,11 +616,11 @@ export default function ReceiverDashboard() {
                             </Badge>
                           </div>
                           <div className="flex items-center gap-3 mt-1">
-                            <span className="text-xs text-gray-500 flex items-center gap-1">
+                            <span className="text-xs  flex items-center gap-1">
                               <User className="w-3 h-3" />
                               {parcel.senderId?.name || "Unknown"}
                             </span>
-                            <span className="text-xs text-gray-500 flex items-center gap-1">
+                            <span className="text-xs  flex items-center gap-1">
                               <Tag className="w-3 h-3" />
                               {parcel.parcelType}
                             </span>
@@ -640,11 +628,11 @@ export default function ReceiverDashboard() {
                         </div>
                       </div>
                       <div className="text-right flex-shrink-0">
-                        <div className="flex items-center gap-1 text-xs text-gray-500 mb-1">
+                        <div className="flex items-center gap-1 text-xs  mb-1">
                           <Weight className="w-3 h-3" />
                           {parcel.weight}kg
                         </div>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs ">
                           {formatDate(parcel.createdAt)}
                         </p>
                       </div>
@@ -652,10 +640,10 @@ export default function ReceiverDashboard() {
                   </Link>
                 ))
               ) : (
-                <div className="text-center py-8 text-gray-500">
-                  <Inbox className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                <div className="text-center py-8 ">
+                  <Inbox className="w-12 h-12  mx-auto mb-3" />
                   <p>No deliveries yet</p>
-                  <p className="text-sm text-gray-400 mt-1">
+                  <p className="text-sm  mt-1">
                     Parcels sent to you will appear here
                   </p>
                 </div>
@@ -687,7 +675,7 @@ export default function ReceiverDashboard() {
                     >
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-2">
-                          <span className="font-medium text-sm text-gray-900">
+                          <span className="font-medium text-sm ">
                             {parcel.trackingId}
                           </span>
                           <Badge
@@ -704,11 +692,11 @@ export default function ReceiverDashboard() {
                       </div>
                       <div className="flex items-center justify-between text-sm">
                         <div className="flex items-center gap-3">
-                          <span className="text-gray-500 flex items-center gap-1">
+                          <span className=" flex items-center gap-1">
                             <User className="w-3 h-3" />
                             {parcel.senderId?.name || "Unknown"}
                           </span>
-                          <span className="text-gray-500 flex items-center gap-1">
+                          <span className=" flex items-center gap-1">
                             <Weight className="w-3 h-3" />
                             {parcel.weight}kg
                           </span>
@@ -717,8 +705,8 @@ export default function ReceiverDashboard() {
                     </div>
                   ))
                 ) : (
-                  <div className="text-center py-6 text-gray-500">
-                    <Truck className="w-10 h-10 text-gray-300 mx-auto mb-2" />
+                  <div className="text-center py-6 ">
+                    <Truck className="w-10 h-10  mx-auto mb-2" />
                     <p className="text-sm">No upcoming deliveries</p>
                   </div>
                 )}
@@ -738,23 +726,19 @@ export default function ReceiverDashboard() {
               <div className="space-y-4">
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">
-                      Delivery Address
-                    </span>
-                    <span className="text-sm font-medium text-gray-900 truncate max-w-[150px]">
+                    <span className="text-sm ">Delivery Address</span>
+                    <span className="text-sm font-medium  truncate max-w-[150px]">
                       {user?.address || "Not set"}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">
-                      Total Received
-                    </span>
-                    <span className="text-sm font-medium text-gray-900">
+                    <span className="text-sm ">Total Received</span>
+                    <span className="text-sm font-medium ">
                       {stats?.receiverParcels || 0} parcels
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Success Rate</span>
+                    <span className="text-sm ">Success Rate</span>
                     <span className="text-sm font-medium text-green-600">
                       {deliverySuccessRate}%
                     </span>
@@ -764,18 +748,16 @@ export default function ReceiverDashboard() {
                 <Separator />
 
                 <div className="space-y-2">
-                  <h4 className="font-medium text-gray-700 text-sm">
-                    Quick Stats
-                  </h4>
+                  <h4 className="font-medium  text-sm">Quick Stats</h4>
                   <div className="grid grid-cols-2 gap-2">
                     <div className="p-2 rounded-lg bg-gray-50">
-                      <p className="text-xs text-gray-500">Total Paid</p>
-                      <p className="font-bold text-gray-900">
+                      <p className="text-xs ">Total Paid</p>
+                      <p className="font-bold ">
                         {formatCurrency(stats?.totalRevenue || 0)}
                       </p>
                     </div>
                     <div className="p-2 rounded-lg bg-gray-50">
-                      <p className="text-xs text-gray-500">Pending</p>
+                      <p className="text-xs ">Pending</p>
                       <p className="font-bold text-yellow-600">
                         {stats?.pendingDeliveries || 0}
                       </p>
@@ -803,8 +785,8 @@ export default function ReceiverDashboard() {
                 <User className="w-5 h-5 text-blue-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">Most Frequent Sender</p>
-                <p className="text-lg font-bold text-gray-900 truncate">
+                <p className="text-sm ">Most Frequent Sender</p>
+                <p className="text-lg font-bold  truncate">
                   {getMostFrequentSender()}
                 </p>
               </div>
@@ -819,10 +801,8 @@ export default function ReceiverDashboard() {
                 <Percent className="w-5 h-5 text-green-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">Delivery Reliability</p>
-                <p className="text-lg font-bold text-gray-900">
-                  {deliverySuccessRate}%
-                </p>
+                <p className="text-sm ">Delivery Reliability</p>
+                <p className="text-lg font-bold ">{deliverySuccessRate}%</p>
               </div>
             </div>
           </CardContent>
@@ -835,8 +815,8 @@ export default function ReceiverDashboard() {
                 <Award className="w-5 h-5 text-purple-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">Top Sender Location</p>
-                <p className="text-lg font-bold text-gray-900 truncate">
+                <p className="text-sm ">Top Sender Location</p>
+                <p className="text-lg font-bold  truncate">
                   {getTopSenderLocation()}
                 </p>
               </div>

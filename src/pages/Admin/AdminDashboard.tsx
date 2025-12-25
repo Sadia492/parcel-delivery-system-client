@@ -308,10 +308,10 @@ export default function AdminDashboard() {
         <CardContent className="pt-6">
           <div className="text-center py-12">
             <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-lg font-semibold  mb-2">
               Failed to Load Dashboard
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className=" mb-4">
               Unable to fetch dashboard data. Please try again later.
             </p>
             <Button onClick={() => window.location.reload()}>Retry</Button>
@@ -325,10 +325,8 @@ export default function AdminDashboard() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 text-center">
-          Admin Dashboard
-        </h1>
-        <p className="text-gray-600 mt-2 text-center">
+        <h1 className="text-3xl font-bold  text-center">Admin Dashboard</h1>
+        <p className=" mt-2 text-center">
           Welcome to your parcel management dashboard. Here's an overview of
           your platform.
         </p>
@@ -355,13 +353,9 @@ export default function AdminDashboard() {
                   {formatPercentage(stat.growth)}
                 </Badge>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">
-                {stat.value}
-              </h3>
-              <p className="text-sm font-medium text-gray-700 mb-1">
-                {stat.title}
-              </p>
-              <p className="text-xs text-gray-500">{stat.description}</p>
+              <h3 className="text-2xl font-bold  mb-1">{stat.value}</h3>
+              <p className="text-sm font-medium  mb-1">{stat.title}</p>
+              <p className="text-xs ">{stat.description}</p>
             </CardContent>
           </Card>
         ))}
@@ -495,7 +489,7 @@ export default function AdminDashboard() {
                     className="w-3 h-3 rounded-full"
                     style={{ backgroundColor: status.color }}
                   />
-                  <span className="text-sm text-gray-600">{status.name}</span>
+                  <span className="text-sm ">{status.name}</span>
                   <span className="text-sm font-semibold ml-auto">
                     {status.value}
                   </span>
@@ -527,20 +521,16 @@ export default function AdminDashboard() {
                           <status.icon className={`w-4 h-4 ${status.color}`} />
                         </div>
                         <div>
-                          <span className="font-medium text-gray-700">
-                            {status.title}
-                          </span>
+                          <span className="font-medium ">{status.title}</span>
                           <div className="flex items-center gap-2">
-                            <span className="text-xl font-bold text-gray-900">
+                            <span className="text-xl font-bold ">
                               {status.value}
                             </span>
-                            <span className="text-sm text-gray-500">
-                              parcels
-                            </span>
+                            <span className="text-sm ">parcels</span>
                           </div>
                         </div>
                       </div>
-                      <span className="text-sm font-semibold text-gray-700">
+                      <span className="text-sm font-semibold ">
                         {status.percentage.toFixed(1)}%
                       </span>
                     </div>
@@ -564,10 +554,10 @@ export default function AdminDashboard() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <span className="text-2xl font-bold text-gray-900">
+                  <span className="text-2xl font-bold ">
                     {stats?.totalUsers?.toLocaleString()}
                   </span>
-                  <p className="text-sm text-gray-600">Total Users</p>
+                  <p className="text-sm ">Total Users</p>
                 </div>
                 <Badge
                   variant="outline"
@@ -583,7 +573,7 @@ export default function AdminDashboard() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-blue-500" />
-                    <span className="text-sm text-gray-700">Senders</span>
+                    <span className="text-sm ">Senders</span>
                   </div>
                   <span className="font-semibold">
                     {stats?.totalSenders || 0}
@@ -593,7 +583,7 @@ export default function AdminDashboard() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-green-500" />
-                    <span className="text-sm text-gray-700">Receivers</span>
+                    <span className="text-sm ">Receivers</span>
                   </div>
                   <span className="font-semibold">
                     {stats?.totalReceivers || 0}
@@ -603,7 +593,7 @@ export default function AdminDashboard() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-red-500" />
-                    <span className="text-sm text-gray-700">Admins</span>
+                    <span className="text-sm ">Admins</span>
                   </div>
                   <span className="font-semibold">
                     {stats?.totalSenders || 0}
@@ -613,7 +603,7 @@ export default function AdminDashboard() {
 
               <div className="pt-4">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-600">Blocked Users</span>
+                  <span className="">Blocked Users</span>
                   <Badge variant="destructive">
                     {stats?.blockedUsers || 0}
                   </Badge>
@@ -647,14 +637,14 @@ export default function AdminDashboard() {
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <div className="p-2 rounded-lg bg-gray-100 flex-shrink-0">
-                        <Package className="w-4 h-4 text-gray-600" />
+                        <Package className="w-4 h-4 " />
                       </div>
                       <div className="min-w-0">
-                        <p className="font-medium text-sm text-gray-900 truncate">
+                        <p className="font-medium text-sm  truncate">
                           {parcel.trackingId}
                         </p>
                         <div className="flex items-center gap-2 mt-1">
-                          <span className="text-xs text-gray-500 truncate">
+                          <span className="text-xs  truncate">
                             {parcel.parcelType} • {parcel.weight}kg
                           </span>
                           <Badge
@@ -675,19 +665,15 @@ export default function AdminDashboard() {
                       </div>
                     </div>
                     <div className="text-right flex-shrink-0">
-                      <p className="font-semibold text-gray-900">
+                      <p className="font-semibold ">
                         {formatCurrency(parcel.fee)}
                       </p>
-                      <p className="text-xs text-gray-500">
-                        {formatDate(parcel.createdAt)}
-                      </p>
+                      <p className="text-xs ">{formatDate(parcel.createdAt)}</p>
                     </div>
                   </div>
                 ))
               ) : (
-                <div className="text-center py-8 text-gray-500">
-                  No recent parcels found
-                </div>
+                <div className="text-center py-8 ">No recent parcels found</div>
               )}
             </div>
           </CardContent>
@@ -729,11 +715,11 @@ export default function AdminDashboard() {
                         )}
                       </div>
                       <div className="min-w-0">
-                        <p className="font-medium text-sm text-gray-900 truncate">
+                        <p className="font-medium text-sm  truncate">
                           {user.name}
                         </p>
                         <div className="flex items-center gap-2 mt-1">
-                          <span className="text-xs text-gray-500 truncate flex items-center gap-1">
+                          <span className="text-xs  truncate flex items-center gap-1">
                             <Mail className="w-3 h-3" />
                             {user.email}
                           </span>
@@ -763,16 +749,14 @@ export default function AdminDashboard() {
                       >
                         {user.isBlocked === "UNBLOCKED" ? "Active" : "Blocked"}
                       </Badge>
-                      <p className="text-xs text-gray-500 mt-1">
+                      <p className="text-xs  mt-1">
                         {formatDate(user.createdAt)}
                       </p>
                     </div>
                   </div>
                 ))
               ) : (
-                <div className="text-center py-8 text-gray-500">
-                  No recent users found
-                </div>
+                <div className="text-center py-8 ">No recent users found</div>
               )}
             </div>
           </CardContent>
@@ -788,7 +772,7 @@ export default function AdminDashboard() {
                 <PieChart className="w-5 h-5 text-purple-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">Parcel Types</p>
+                <p className="text-sm ">Parcel Types</p>
                 <div className="flex items-center gap-4 mt-1">
                   {parcelTypeData.map((type: any) => (
                     <div key={type.name} className="flex items-center gap-1">
@@ -796,7 +780,7 @@ export default function AdminDashboard() {
                         className="w-2 h-2 rounded-full"
                         style={{ backgroundColor: type.color }}
                       />
-                      <span className="text-xs text-gray-700">{type.name}</span>
+                      <span className="text-xs ">{type.name}</span>
                       <span className="text-xs font-semibold">
                         {type.value}
                       </span>
@@ -815,7 +799,7 @@ export default function AdminDashboard() {
                 <CheckCircle className="w-5 h-5 text-blue-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">Delivery Success Rate</p>
+                <p className="text-sm ">Delivery Success Rate</p>
                 <p className="text-2xl font-bold text-green-600">
                   {stats?.totalParcels && stats.deliveredParcels
                     ? (
@@ -836,8 +820,8 @@ export default function AdminDashboard() {
                 <DollarSign className="w-5 h-5 text-orange-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">Avg. Parcel Value</p>
-                <p className="text-2xl font-bold text-gray-900">
+                <p className="text-sm ">Avg. Parcel Value</p>
+                <p className="text-2xl font-bold ">
                   {stats?.totalParcels && stats.totalRevenue
                     ? formatCurrency(stats.totalRevenue / stats.totalParcels)
                     : formatCurrency(0)}

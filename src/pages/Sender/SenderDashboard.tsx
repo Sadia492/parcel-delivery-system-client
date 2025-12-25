@@ -293,10 +293,10 @@ export default function SenderDashboard() {
         <CardContent className="pt-6">
           <div className="text-center py-12">
             <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-lg font-semibold  mb-2">
               Failed to Load Dashboard
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className=" mb-4">
               Unable to fetch your dashboard data. Please try again later.
             </p>
             <Button onClick={() => refetchSenderData()}>Retry</Button>
@@ -311,8 +311,8 @@ export default function SenderDashboard() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Sender Dashboard</h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className="text-3xl font-bold ">Sender Dashboard</h1>
+          <p className=" mt-2">
             Welcome back,{" "}
             <span className="font-semibold text-blue-600">{user?.name}</span>!
             Here's an overview of your parcel shipments.
@@ -362,13 +362,9 @@ export default function SenderDashboard() {
                   {stat.growth.toFixed(1)}%
                 </Badge>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">
-                {stat.value}
-              </h3>
-              <p className="text-sm font-medium text-gray-700 mb-1">
-                {stat.title}
-              </p>
-              <p className="text-xs text-gray-500">{stat.description}</p>
+              <h3 className="text-2xl font-bold mb-1">{stat.value}</h3>
+              <p className="text-sm font-medium mb-1">{stat.title}</p>
+              <p className="text-xs">{stat.description}</p>
             </CardContent>
           </Card>
         ))}
@@ -398,20 +394,16 @@ export default function SenderDashboard() {
                           <status.icon className={`w-4 h-4 ${status.color}`} />
                         </div>
                         <div>
-                          <span className="font-medium text-gray-700">
-                            {status.title}
-                          </span>
+                          <span className="font-medium ">{status.title}</span>
                           <div className="flex items-center gap-2">
-                            <span className="text-xl font-bold text-gray-900">
+                            <span className="text-xl font-bold ">
                               {status.value}
                             </span>
-                            <span className="text-sm text-gray-500">
-                              parcels
-                            </span>
+                            <span className="text-sm ">parcels</span>
                           </div>
                         </div>
                       </div>
-                      <span className="text-sm font-semibold text-gray-700">
+                      <span className="text-sm font-semibold ">
                         {status.percentage.toFixed(1)}%
                       </span>
                     </div>
@@ -476,19 +468,17 @@ export default function SenderDashboard() {
               <Separator className="my-3" />
 
               <div className="space-y-2">
-                <h4 className="font-medium text-gray-700 text-sm">
-                  Quick Stats
-                </h4>
+                <h4 className="font-medium text-sm">Quick Stats</h4>
                 <div className="grid grid-cols-2 gap-2">
                   <div className="p-2 rounded-lg bg-gray-50">
-                    <p className="text-xs text-gray-500">Avg. Value</p>
-                    <p className="font-bold text-gray-900">
+                    <p className="text-xs">Avg. Value</p>
+                    <p className="font-bold ">
                       {formatCurrency(averageParcelValue)}
                     </p>
                   </div>
                   <div className="p-2 rounded-lg bg-gray-50">
-                    <p className="text-xs text-gray-500">Total Weight</p>
-                    <p className="font-bold text-gray-900">{totalWeight}kg</p>
+                    <p className="text-xs ">Total Weight</p>
+                    <p className="font-bold ">{totalWeight}kg</p>
                   </div>
                 </div>
               </div>
@@ -544,7 +534,7 @@ export default function SenderDashboard() {
                         </div>
                         <div className="min-w-0">
                           <div className="flex items-center gap-2">
-                            <p className="font-medium text-sm text-gray-900 truncate">
+                            <p className="font-medium text-sm  truncate">
                               {parcel.trackingId}
                             </p>
                             <Badge
@@ -563,11 +553,11 @@ export default function SenderDashboard() {
                             </Badge>
                           </div>
                           <div className="flex items-center gap-3 mt-1">
-                            <span className="text-xs text-gray-500 flex items-center gap-1">
+                            <span className="text-xs  flex items-center gap-1">
                               <User className="w-3 h-3" />
                               {parcel.receiverId?.name || "Unknown"}
                             </span>
-                            <span className="text-xs text-gray-500 flex items-center gap-1">
+                            <span className="text-xs  flex items-center gap-1">
                               <MapPin className="w-3 h-3" />
                               {parcel.toAddress || "No address"}
                             </span>
@@ -575,14 +565,14 @@ export default function SenderDashboard() {
                         </div>
                       </div>
                       <div className="text-right flex-shrink-0">
-                        <p className="font-semibold text-gray-900">
+                        <p className="font-semibold ">
                           {formatCurrency(parcel.fee)}
                         </p>
-                        <div className="flex items-center gap-1 text-xs text-gray-500">
+                        <div className="flex items-center gap-1 text-xs ">
                           <Weight className="w-3 h-3" />
                           {parcel.weight}kg
                         </div>
-                        <p className="text-xs text-gray-500 mt-1">
+                        <p className="text-xs  mt-1">
                           {formatDate(parcel.createdAt)}
                         </p>
                       </div>
@@ -590,8 +580,8 @@ export default function SenderDashboard() {
                   </Link>
                 ))
               ) : (
-                <div className="text-center py-8 text-gray-500">
-                  <Package className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                <div className="text-center py-8 ">
+                  <Package className="w-12 h-12  mx-auto mb-3" />
                   <p>No shipments yet</p>
                   <Button asChild variant="outline" size="sm" className="mt-3">
                     <Link to="/sender/parcels/create">
@@ -627,7 +617,7 @@ export default function SenderDashboard() {
                     >
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-2">
-                          <span className="font-medium text-sm text-gray-900">
+                          <span className="font-medium text-sm ">
                             {parcel.trackingId}
                           </span>
                           <Badge
@@ -641,30 +631,28 @@ export default function SenderDashboard() {
                             {parcel.status}
                           </Badge>
                         </div>
-                        <span className="text-sm font-semibold text-gray-900">
+                        <span className="text-sm font-semibold ">
                           {formatCurrency(parcel.fee)}
                         </span>
                       </div>
                       <div className="flex items-center justify-between text-sm">
                         <div className="flex items-center gap-3">
-                          <span className="text-gray-500 flex items-center gap-1">
+                          <span className=" flex items-center gap-1">
                             <User className="w-3 h-3" />
                             {parcel.receiverId?.name || "Unknown"}
                           </span>
-                          <span className="text-gray-500 flex items-center gap-1">
+                          <span className=" flex items-center gap-1">
                             <Weight className="w-3 h-3" />
                             {parcel.weight}kg
                           </span>
                         </div>
-                        <span className="text-gray-500">
-                          {formatDate(parcel.createdAt)}
-                        </span>
+                        <span className="">{formatDate(parcel.createdAt)}</span>
                       </div>
                     </div>
                   ))
                 ) : (
-                  <div className="text-center py-6 text-gray-500">
-                    <Truck className="w-10 h-10 text-gray-300 mx-auto mb-2" />
+                  <div className="text-center py-6 ">
+                    <Truck className="w-10 h-10  mx-auto mb-2" />
                     <p className="text-sm">No upcoming deliveries</p>
                   </div>
                 )}
@@ -684,13 +672,13 @@ export default function SenderDashboard() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-600">Collected Revenue</p>
+                    <p className="text-sm ">Collected Revenue</p>
                     <p className="text-xl font-bold text-green-600">
                       {formatCurrency(stats?.collectedRevenue || 0)}
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm text-gray-600">Pending Revenue</p>
+                    <p className="text-sm ">Pending Revenue</p>
                     <p className="text-xl font-bold text-yellow-600">
                       {formatCurrency(stats?.pendingRevenue || 0)}
                     </p>
@@ -701,21 +689,19 @@ export default function SenderDashboard() {
 
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">
-                      Total Shipments
-                    </span>
+                    <span className="text-sm ">Total Shipments</span>
                     <span className="font-semibold">
                       {stats?.senderParcels || 0}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Delivered</span>
+                    <span className="text-sm ">Delivered</span>
                     <span className="font-semibold text-green-600">
                       {stats?.deliveredParcels || 0}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">In Transit</span>
+                    <span className="text-sm ">In Transit</span>
                     <span className="font-semibold text-blue-600">
                       {stats?.dispatchedParcels || 0}
                     </span>
@@ -740,8 +726,8 @@ export default function SenderDashboard() {
                 <Users className="w-5 h-5 text-blue-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">Most Sent To</p>
-                <p className="text-lg font-bold text-gray-900 truncate">
+                <p className="text-sm ">Most Sent To</p>
+                <p className="text-lg font-bold  truncate">
                   {getMostFrequentReceiver()}
                 </p>
               </div>
@@ -756,8 +742,8 @@ export default function SenderDashboard() {
                 <Award className="w-5 h-5 text-purple-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">Top Destination</p>
-                <p className="text-lg font-bold text-gray-900 truncate">
+                <p className="text-sm ">Top Destination</p>
+                <p className="text-lg font-bold  truncate">
                   {getTopDestination()}
                 </p>
               </div>
@@ -772,7 +758,7 @@ export default function SenderDashboard() {
                 <FileText className="w-5 h-5 text-orange-600" />
               </div>
               <div>
-                <p className="text-sm text-gray-600">Parcel Types</p>
+                <p className="text-sm ">Parcel Types</p>
                 <div className="flex items-center gap-2 mt-2">
                   <Badge
                     variant="secondary"

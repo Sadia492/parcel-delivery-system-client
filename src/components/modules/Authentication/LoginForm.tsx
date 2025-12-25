@@ -32,8 +32,14 @@ export function LoginForm({
   const { register, handleSubmit, reset, setValue } =
     useForm<LoginFormValues>();
   const [loginUser, { isLoading }] = useLoginUserMutation();
+  const { data: userData, refetch: refetchUserInfo } = useUserInfoQuery(
+    undefined,
+    {
+      refetchOnMountOrArgChange: false,
+    }
+  );
+
   const navigate = useNavigate();
-  const { data: user } = useUserInfoQuery(undefined);
   const [showPassword, setShowPassword] = useState(false);
 
   // Demo users with different roles
@@ -65,33 +71,58 @@ export function LoginForm({
     setValue("email", user.email);
     setValue("password", user.password);
   };
+
   const onSubmit = async (data: LoginFormValues) => {
+    console.log("🔵 Starting login process...");
+    console.log("🔵 Form data:", data);
+
     try {
-      const response = await loginUser(data).unwrap();
-      if (response?.success && user?.success) {
-        // Navigate based on role
-        let redirectPath = "/";
+      // Step 1: Login the user
+      console.log("🔵 Calling loginUser mutation...");
+      const loginResponse = await loginUser(data).unwrap();
+      console.log("✅ Login response:", loginResponse);
 
-        switch (user?.data?.role) {
-          case "ADMIN":
-            redirectPath = "/admin/dashboard";
-            break;
-          case "SENDER":
-            redirectPath = "/sender/dashboard";
-            break;
-          case "RECEIVER":
-            redirectPath = "/receiver/dashboard";
-            break;
-          default:
-            redirectPath = "/";
+      if (loginResponse?.success) {
+        toast.success("Login successful! Redirecting...");
+
+        // Check if user data is in login response
+        const userFromResponse =
+          loginResponse.data?.user || loginResponse.data || loginResponse.user;
+        console.log("🔵 User from login response:", userFromResponse);
+
+        if (userFromResponse?.role) {
+          // User data already in response - use it directly
+          console.log(
+            "✅ Found role in login response:",
+            userFromResponse.role
+          );
+          redirectBasedOnRole(userFromResponse.role);
+        } else {
+          // Try to fetch user info
+          console.log("🔵 No role in login response, fetching user info...");
+          try {
+            const userInfoResponse = await refetchUserInfo();
+            console.log("✅ User info response:", userInfoResponse);
+
+            if (userInfoResponse.data?.success && userInfoResponse.data?.data) {
+              const userRole = userInfoResponse.data.data.role;
+              console.log("✅ User role from API:", userRole);
+              redirectBasedOnRole(userRole);
+            } else {
+              console.log("❌ Could not get user role from API");
+              navigate("/");
+            }
+          } catch (userInfoError) {
+            console.error("❌ Failed to fetch user info:", userInfoError);
+            // Still navigate to home if user info fails
+            navigate("/");
+          }
         }
-
-        toast.success(`Logged in successfully as ${user?.role}!`);
-        reset();
-        navigate(redirectPath);
+      } else {
+        console.log("❌ Login response not successful");
       }
     } catch (err: any) {
-      console.error("Login error:", err);
+      console.error("❌ Login error:", err);
       const message = err?.data?.message;
       if (message === "Password does not match") {
         toast.error("Invalid credentials");
@@ -100,6 +131,35 @@ export function LoginForm({
       }
     }
   };
+
+  const redirectBasedOnRole = (role: string) => {
+    console.log("🔵 Redirecting based on role:", role);
+
+    let redirectPath = "/";
+
+    switch (role?.toUpperCase()) {
+      case "ADMIN":
+        redirectPath = "/admin/dashboard";
+        break;
+      case "SENDER":
+        redirectPath = "/sender/dashboard";
+        break;
+      case "RECEIVER":
+        redirectPath = "/receiver/dashboard";
+        break;
+      default:
+        redirectPath = "/";
+    }
+
+    console.log("✅ Redirecting to:", redirectPath);
+    reset();
+    navigate(redirectPath);
+    toast.success(`Welcome! Redirecting to ${role} dashboard...`);
+  };
+
+  // Log current user data for debugging
+  console.log("🔵 Current userData:", userData);
+  console.log("🔵 Can refetch user info:", refetchUserInfo);
 
   return (
     <div className="w-full max-w-md mx-auto">
