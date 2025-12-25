@@ -22,61 +22,51 @@ import {
 } from "@/redux/features/auth/auth.api";
 import { useAppDispatch } from "@/redux/hook";
 import { role } from "@/constants/role";
-import {
-  HelpCircle,
-  Shield,
-  FileText,
-  Home,
-  Package,
-  MapPin,
-  User,
-  Info,
-  Mail,
-  ChevronDown,
-  Users,
-} from "lucide-react";
+import { Shield, FileText, Package, User, ChevronDown } from "lucide-react";
 
 // Main navigation links
 const mainNavigationLinks = [
-  { href: "/", label: "Home", icon: <Home className="w-4 h-4" /> },
+  {
+    href: "/",
+    label: "Home",
+  },
   {
     href: "/all-parcels",
     label: "All Parcels",
-    icon: <Package className="w-4 h-4" />,
+  },
+
+  {
+    href: "/about",
+    label: "About",
   },
   {
-    href: "/track",
-    label: "Track Parcel",
-    icon: <MapPin className="w-4 h-4" />,
+    href: "/contact",
+    label: "Contact",
   },
-  { href: "/about", label: "About", icon: <Info className="w-4 h-4" /> },
-  { href: "/contact", label: "Contact", icon: <Mail className="w-4 h-4" /> },
-  { href: "/help", label: "Help", icon: <HelpCircle className="w-4 h-4" /> },
+  {
+    href: "/help",
+    label: "Help",
+  },
 ];
 
-// Dashboard links (role-based)
 const dashboardLinks = [
   {
     href: "/admin",
     label: "Admin Dashboard",
     role: role.admin,
-    icon: <User className="w-4 h-4" />,
   },
   {
     href: "/receiver",
     label: "Receiver Dashboard",
     role: role.receiver,
-    icon: <Package className="w-4 h-4" />,
   },
   {
     href: "/sender",
     label: "Sender Dashboard",
     role: role.sender,
-    icon: <Users className="w-4 h-4" />,
   },
 ];
 
-// Mega Menu for Legal & Policies
 const legalPolicyItems = [
   {
     title: "Privacy Policy",
@@ -160,7 +150,6 @@ export default function Navbar() {
                       to={link.href}
                       className="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-muted transition-colors"
                     >
-                      {link.icon}
                       {link.label}
                     </Link>
                   ))}
@@ -177,7 +166,6 @@ export default function Navbar() {
                       to={item.href}
                       className="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-muted transition-colors"
                     >
-                      {item.icon}
                       <div>
                         <div className="font-medium">{item.title}</div>
                         <div className="text-xs text-muted-foreground">
@@ -195,7 +183,6 @@ export default function Navbar() {
                       to={userDashboardLink.href}
                       className="flex items-center gap-3 px-3 py-2 text-sm rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
                     >
-                      {userDashboardLink.icon}
                       {userDashboardLink.label}
                     </Link>
                   </div>
@@ -224,7 +211,7 @@ export default function Navbar() {
                     >
                       <Link to={link.href}>
                         <div className="flex items-center gap-2">
-                          {link.icon}
+                          {/* {link.icon} */}
                           {link.label}
                         </div>
                       </Link>
@@ -236,7 +223,7 @@ export default function Navbar() {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="text-muted-foreground hover:text-primary px-3 py-2 font-medium">
                     <div className="flex items-center gap-2">
-                      <Shield className="w-4 h-4" />
+                      {/* <Shield className="w-4 h-4" /> */}
                       Legal
                       <ChevronDown className="w-3 h-3 ml-1 transition-transform duration-200" />
                     </div>
@@ -309,7 +296,7 @@ export default function Navbar() {
                     >
                       <Link to={userDashboardLink.href}>
                         <div className="flex items-center gap-2">
-                          {userDashboardLink.icon}
+                          {/* {userDashboardLink.icon} */}
                           Dashboard
                         </div>
                       </Link>

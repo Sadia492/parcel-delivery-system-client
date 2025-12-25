@@ -37,10 +37,10 @@ export default function Contact() {
 
         <ul className="space-y-3 text-foreground/80">
           <li>
-            <strong>Email:</strong> support@parceldelivery.com
+            <strong>Email:</strong> sadiaafrin2792@gmail.com
           </li>
           <li>
-            <strong>Phone:</strong> +880 123 456 789
+            <strong>Phone:</strong> +880 1707604378
           </li>
           <li>
             <strong>Address:</strong> Dhaka, Bangladesh
