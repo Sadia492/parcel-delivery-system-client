@@ -506,12 +506,7 @@ export default function ReceiverDashboard() {
                 variant="outline"
                 asChild
                 className="w-full justify-start gap-2"
-              >
-                <Link to="/receiver/settings">
-                  <Home className="w-4 h-4" />
-                  Update Delivery Address
-                </Link>
-              </Button>
+              ></Button>
 
               <Button
                 variant="outline"
@@ -529,13 +524,13 @@ export default function ReceiverDashboard() {
               <div className="space-y-2">
                 <h4 className="font-medium  text-sm">Quick Stats</h4>
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="p-2 rounded-lg bg-gray-50">
+                  <div className="p-2 rounded-lg ">
                     <p className="text-xs ">Total Weight</p>
                     <p className="font-bold ">
                       {totalWeightReceived.toFixed(1)}kg
                     </p>
                   </div>
-                  <div className="p-2 rounded-lg bg-gray-50">
+                  <div className="p-2 rounded-lg ">
                     <p className="text-xs ">Avg. Weight</p>
                     <p className="font-bold ">
                       {averageParcelWeight.toFixed(1)}kg
@@ -570,7 +565,7 @@ export default function ReceiverDashboard() {
                     to={`/parcel/${parcel._id}`}
                     className="block"
                   >
-                    <div className="flex items-center justify-between p-3 rounded-lg border hover:bg-gray-50 transition-colors group">
+                    <div className="flex items-center justify-between p-3 rounded-lg border hover: transition-colors group">
                       <div className="flex items-center gap-3 min-w-0">
                         <div
                           className={`p-2 rounded-lg flex-shrink-0 ${
@@ -671,7 +666,7 @@ export default function ReceiverDashboard() {
                   upcomingDeliveries.map((parcel: any) => (
                     <div
                       key={parcel._id}
-                      className="p-3 rounded-lg border hover:bg-gray-50 transition-colors"
+                      className="p-3 rounded-lg border hover: transition-colors"
                     >
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-2">
@@ -750,13 +745,13 @@ export default function ReceiverDashboard() {
                 <div className="space-y-2">
                   <h4 className="font-medium  text-sm">Quick Stats</h4>
                   <div className="grid grid-cols-2 gap-2">
-                    <div className="p-2 rounded-lg bg-gray-50">
+                    <div className="p-2 rounded-lg ">
                       <p className="text-xs ">Total Paid</p>
                       <p className="font-bold ">
                         {formatCurrency(stats?.totalRevenue || 0)}
                       </p>
                     </div>
-                    <div className="p-2 rounded-lg bg-gray-50">
+                    <div className="p-2 rounded-lg ">
                       <p className="text-xs ">Pending</p>
                       <p className="font-bold text-yellow-600">
                         {stats?.pendingDeliveries || 0}
@@ -764,12 +759,6 @@ export default function ReceiverDashboard() {
                     </div>
                   </div>
                 </div>
-
-                <Button asChild variant="outline" className="w-full">
-                  <Link to="/receiver/settings">
-                    Manage Delivery Preferences
-                  </Link>
-                </Button>
               </div>
             </CardContent>
           </Card>
