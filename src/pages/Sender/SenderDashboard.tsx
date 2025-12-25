@@ -11,7 +11,6 @@ import {
   ArrowDownRight,
   FileText,
   Weight,
-  Plus,
   RefreshCw,
   Activity,
   Users,
@@ -328,12 +327,6 @@ export default function SenderDashboard() {
             <RefreshCw className="w-4 h-4" />
             Refresh
           </Button>
-          <Button asChild className="gap-2">
-            <Link to="/sender/parcels/create">
-              <Plus className="w-4 h-4" />
-              New Shipment
-            </Link>
-          </Button>
         </div>
       </div>
 
@@ -425,13 +418,6 @@ export default function SenderDashboard() {
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              <Button asChild className="w-full justify-start gap-2">
-                <Link to="/sender/parcels/create">
-                  <Plus className="w-4 h-4" />
-                  Create New Shipment
-                </Link>
-              </Button>
-
               <Button
                 variant="outline"
                 asChild
@@ -448,7 +434,7 @@ export default function SenderDashboard() {
                 asChild
                 className="w-full justify-start gap-2"
               >
-                <Link to="/sender/parcels/track">
+                <Link to="/track">
                   <Truck className="w-4 h-4" />
                   Track Shipments
                 </Link>
@@ -470,13 +456,13 @@ export default function SenderDashboard() {
               <div className="space-y-2">
                 <h4 className="font-medium text-sm">Quick Stats</h4>
                 <div className="grid grid-cols-2 gap-2">
-                  <div className="p-2 rounded-lg bg-gray-50">
+                  <div className="p-2 rounded-lg ">
                     <p className="text-xs">Avg. Value</p>
                     <p className="font-bold ">
                       {formatCurrency(averageParcelValue)}
                     </p>
                   </div>
-                  <div className="p-2 rounded-lg bg-gray-50">
+                  <div className="p-2 rounded-lg ">
                     <p className="text-xs ">Total Weight</p>
                     <p className="font-bold ">{totalWeight}kg</p>
                   </div>
@@ -707,10 +693,6 @@ export default function SenderDashboard() {
                     </span>
                   </div>
                 </div>
-
-                <Button asChild variant="outline" className="w-full">
-                  <Link to="/sender/transactions">View All Transactions</Link>
-                </Button>
               </div>
             </CardContent>
           </Card>

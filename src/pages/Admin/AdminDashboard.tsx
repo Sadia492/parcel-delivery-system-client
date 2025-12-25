@@ -633,10 +633,10 @@ export default function AdminDashboard() {
                 recentParcels.map((parcel: any) => (
                   <div
                     key={parcel._id}
-                    className="flex items-center justify-between p-3 rounded-lg border hover:bg-gray-50 transition-colors"
+                    className="flex items-center justify-between p-3 rounded-lg border  transition-colors"
                   >
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className="p-2 rounded-lg bg-gray-100 flex-shrink-0">
+                      <div className="p-2 rounded-lg  flex-shrink-0">
                         <Package className="w-4 h-4 " />
                       </div>
                       <div className="min-w-0">
@@ -694,7 +694,7 @@ export default function AdminDashboard() {
                 recentUsers.map((user: any) => (
                   <div
                     key={user._id}
-                    className="flex items-center justify-between p-3 rounded-lg border hover:bg-gray-50 transition-colors"
+                    className="flex items-center justify-between p-3 rounded-lg border  transition-colors"
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <div

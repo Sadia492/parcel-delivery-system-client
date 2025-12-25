@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import {
   User,
   Mail,
@@ -581,10 +581,6 @@ export default function ProfilePage() {
                               <>
                                 <li className="flex items-center gap-2">
                                   <CheckCircle className="w-4 h-4 text-green-500" />
-                                  <span>Create parcel shipments</span>
-                                </li>
-                                <li className="flex items-center gap-2">
-                                  <CheckCircle className="w-4 h-4 text-green-500" />
                                   <span>Track deliveries</span>
                                 </li>
                                 <li className="flex items-center gap-2">
@@ -622,15 +618,25 @@ export default function ProfilePage() {
                                   variant="outline"
                                   className="w-full justify-start gap-2"
                                 >
-                                  <Users className="w-4 h-4" />
-                                  Manage Users
+                                  <Link
+                                    className="flex gap-2"
+                                    to={"/admin/users"}
+                                  >
+                                    <Users className="w-4 h-4" />
+                                    Manage Users
+                                  </Link>
                                 </Button>
                                 <Button
                                   variant="outline"
                                   className="w-full justify-start gap-2"
                                 >
-                                  <Activity className="w-4 h-4" />
-                                  View Analytics
+                                  <Link
+                                    className="flex gap-2"
+                                    to={"/admin/dashboard"}
+                                  >
+                                    <Activity className="w-4 h-4" />
+                                    View Analytics
+                                  </Link>
                                 </Button>
                               </>
                             ) : user.role === "SENDER" ? (
@@ -639,15 +645,22 @@ export default function ProfilePage() {
                                   variant="outline"
                                   className="w-full justify-start gap-2"
                                 >
-                                  <Package className="w-4 h-4" />
-                                  Create New Shipment
+                                  <Link
+                                    className="flex gap-2"
+                                    to={"/sender/parcels"}
+                                  >
+                                    <MapPin className="w-4 h-4" />
+                                    Create Shipment
+                                  </Link>
                                 </Button>
                                 <Button
                                   variant="outline"
                                   className="w-full justify-start gap-2"
                                 >
-                                  <Truck className="w-4 h-4" />
-                                  Track Parcels
+                                  <Link className="flex gap-2" to={"/track"}>
+                                    <Truck className="w-4 h-4" />
+                                    Track Parcels
+                                  </Link>
                                 </Button>
                               </>
                             ) : (
@@ -656,15 +669,13 @@ export default function ProfilePage() {
                                   variant="outline"
                                   className="w-full justify-start gap-2"
                                 >
-                                  <Package className="w-4 h-4" />
-                                  Check Incoming Parcels
-                                </Button>
-                                <Button
-                                  variant="outline"
-                                  className="w-full justify-start gap-2"
-                                >
-                                  <MapPin className="w-4 h-4" />
-                                  Update Delivery Address
+                                  <Link
+                                    className="flex gap-2"
+                                    to={"/receiver/my-parcels"}
+                                  >
+                                    <Package className="w-4 h-4" />
+                                    Check Incoming Parcels
+                                  </Link>
                                 </Button>
                               </>
                             )}
@@ -672,8 +683,10 @@ export default function ProfilePage() {
                               variant="outline"
                               className="w-full justify-start gap-2"
                             >
-                              <HelpCircle className="w-4 h-4" />
-                              Get Help
+                              <Link className="flex gap-2" to={"/help"}>
+                                <HelpCircle className="w-4 h-4" />
+                                Get Help
+                              </Link>
                             </Button>
                           </div>
                         </div>
