@@ -34,7 +34,6 @@ import {
   Mail,
   ChevronDown,
   Users,
-  Settings,
 } from "lucide-react";
 
 // Main navigation links
@@ -366,14 +365,7 @@ export default function Navbar() {
                         className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-muted transition-colors"
                       >
                         <Package className="w-4 h-4" />
-                        My Parcels
-                      </Link>
-                      <Link
-                        to="/settings"
-                        className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-muted transition-colors"
-                      >
-                        <Settings className="w-4 h-4" />
-                        Settings
+                        Dashboard
                       </Link>
                     </div>
                   </div>

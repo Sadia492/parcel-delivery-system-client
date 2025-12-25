@@ -9,7 +9,6 @@ import {
   Shield,
   Search,
   Home,
-  Settings,
   ChevronDown,
 } from "lucide-react";
 import { Link } from "react-router";
@@ -23,16 +22,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import {
   useUserInfoQuery,
   useLogoutMutation,
-  authApi,
 } from "@/redux/features/auth/auth.api";
-import { useAppDispatch } from "@/redux/hook";
 import { role } from "@/constants/role";
 import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
@@ -40,14 +36,11 @@ import { cn } from "@/lib/utils";
 export function DashboardNavbar() {
   const { data } = useUserInfoQuery(undefined);
   const [logout] = useLogoutMutation();
-  const dispatch = useAppDispatch();
-  const [searchQuery, setSearchQuery] = useState("");
   const [showSearch, setShowSearch] = useState(false);
 
   const handleLogout = async () => {
     try {
       await logout(undefined).unwrap();
-      dispatch(authApi.util.resetApiState());
       toast.success("Logged out successfully!");
       window.location.href = "/";
     } catch (err) {
@@ -142,37 +135,6 @@ export function DashboardNavbar() {
               Welcome back, {userName}
             </p>
           </div>
-        </div>
-      </div>
-
-      {/* Center: Search Bar - Responsive */}
-      <div
-        className={cn(
-          "transition-all duration-200",
-          showSearch
-            ? "absolute inset-x-0 top-16 px-4 py-2 bg-background border-b shadow-lg"
-            : "hidden lg:flex flex-1 max-w-lg"
-        )}
-      >
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-          <Input
-            type="search"
-            placeholder="Search parcels, transactions..."
-            className="pl-10 pr-10"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          {showSearch && (
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute right-1 top-1/2 transform -translate-y-1/2 h-7 w-7"
-              onClick={() => setShowSearch(false)}
-            >
-              <span className="text-lg">×</span>
-            </Button>
-          )}
         </div>
       </div>
 
@@ -386,61 +348,9 @@ export function DashboardNavbar() {
                   <span className="text-xs">Profile</span>
                 </Link>
               </DropdownMenuItem>
-
-              <DropdownMenuItem
-                asChild
-                className="cursor-pointer justify-center"
-              >
-                <Link
-                  to="/parcels"
-                  className="flex flex-col items-center p-2 rounded"
-                >
-                  <Package className="w-4 h-4 mb-1" />
-                  <span className="text-xs">Parcels</span>
-                </Link>
-              </DropdownMenuItem>
-
-              <DropdownMenuItem
-                asChild
-                className="cursor-pointer justify-center"
-              >
-                <Link
-                  to="/help"
-                  className="flex flex-col items-center p-2 rounded"
-                >
-                  <HelpCircle className="w-4 h-4 mb-1" />
-                  <span className="text-xs">Help</span>
-                </Link>
-              </DropdownMenuItem>
             </div>
 
             <DropdownMenuSeparator />
-
-            {/* Full menu items */}
-            <div className="space-y-1">
-              {userRole === role.admin && (
-                <DropdownMenuItem asChild className="cursor-pointer">
-                  <Link to="/dashboard/users" className="w-full">
-                    <Users className="w-4 h-4 mr-2" />
-                    Manage Users
-                  </Link>
-                </DropdownMenuItem>
-              )}
-
-              <DropdownMenuItem asChild className="cursor-pointer">
-                <Link to="/dashboard/analytics" className="w-full">
-                  <Settings className="w-4 h-4 mr-2" />
-                  Analytics
-                </Link>
-              </DropdownMenuItem>
-
-              <DropdownMenuItem asChild className="cursor-pointer">
-                <Link to="/settings" className="w-full">
-                  <Settings className="w-4 h-4 mr-2" />
-                  Settings
-                </Link>
-              </DropdownMenuItem>
-            </div>
 
             <DropdownMenuSeparator />
 
